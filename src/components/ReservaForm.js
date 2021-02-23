@@ -8,7 +8,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import TablaHorarios from './TablaHorarios'
+import TablaHorarios from './TablaHorarios';
+import { isLogin } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,9 +20,11 @@ const useStyles = makeStyles((theme) => ({
     input: {
         display: 'none',
     },
+    button: {
+        color: '#000',
+        backgroundColor: "#fff"
+    }
 }));
-
-
 
 const options = [
     { title: 'Tienda 1' },
@@ -47,7 +50,11 @@ export default function FormDialog(props) {
     const [horarios, setHorarios] = React.useState([]);
 
     const handleClickOpen = () => {
-        setOpen(true);
+        if (isLogin())
+            setOpen(true);
+        else
+            props.history.push("/login");
+
     };
 
     const handleClose = () => {
@@ -70,10 +77,17 @@ export default function FormDialog(props) {
         props.save(newItem);
         setStatus("");
         setTienda("");
+<<<<<<< HEAD
         setDueDate(new Date());
         setName("");
         setEmail("");
         setOpen(false)*/
+=======
+        setServicio("");
+        setFecha(null);
+        setOpen(false);
+        setHorarios([]);
+>>>>>>> 24fdcc0 (Navegacion)
     };
 
     const handleTiendaChange = (e) => {
@@ -107,7 +121,7 @@ export default function FormDialog(props) {
 
     return (
         <div className={classes.root}>
-            <Fab size="small" color="secondary" aria-label="add" onClick={handleClickOpen}>
+            <Fab size="small" aria-label="add" onClick={handleClickOpen} className={classes.button}>
                 <AddIcon />
             </Fab>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title"

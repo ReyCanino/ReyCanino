@@ -19,9 +19,6 @@ const useStyles = makeStyles({
 export default function TablaHorarios(props) {
     const classes = useStyles();
 
-    const enviar = (id) => {
-        console.log(id);
-    }
     return (
         <div>
             {
@@ -34,6 +31,7 @@ export default function TablaHorarios(props) {
                                     <TableCell>Id</TableCell>
                                     <TableCell align="center">Hora Inicial</TableCell>
                                     <TableCell align="center">Hora Final</TableCell>
+                                    <TableCell align="center">Reservar</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -45,7 +43,7 @@ export default function TablaHorarios(props) {
                                         <TableCell align="center">{row.horaini}</TableCell>
                                         <TableCell align="center">{row.horafin}</TableCell>
                                         <TableCell align="center">
-                                            <Button variant="contained" color="primary" onClick={enviar(row.id)}>
+                                            <Button variant="contained" color="primary" onClick={() => { props.save(row.id) }}>
                                                 Reservar
                                             </Button>
                                         </TableCell>

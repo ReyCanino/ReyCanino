@@ -1,8 +1,8 @@
 import './App.css';
 import React, { Component } from 'react';
-import Listado from './components/Listado';
-import Home from './components/Home';
-import Login from './components/Login';
+import Listado from './pages/Listado';
+import Home from './pages/Home';
+import Login from './pages/Login';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 

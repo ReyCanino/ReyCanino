@@ -17,7 +17,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import HomeIcon from '@material-ui/icons/Home';
 import Avatar from '@material-ui/core/Avatar';
+import StoreIcon from '@material-ui/icons/Store';
 import { isLogin } from '../utils';
 import { login } from '../utils';
 import { logout } from '../utils';
@@ -147,6 +149,17 @@ export default function PersistentDrawerLeft(props) {
                         {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </div>
+                <Divider />
+                <List>
+                    <ListItem button key={'Home'}>
+                        <ListItemIcon><HomeIcon /></ListItemIcon>
+                        <ListItemText primary={"Home"} />
+                    </ListItem>
+                    <ListItem button key={'Services'}>
+                        <ListItemIcon><StoreIcon /></ListItemIcon>
+                        <ListItemText primary={"Servicios"} />
+                    </ListItem>
+                </List>
                 <Divider />
                 {
                     isLoggedIn &&

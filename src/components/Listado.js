@@ -4,9 +4,8 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import IconButton from '@material-ui/core/IconButton';
-import DoneOutlineRoundedIcon from '@material-ui/icons/DoneOutlineRounded';
 import tiendas from "../sample/Tiendas";
+import ReservaForm from './ReservaForm';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,9 +44,7 @@ export default function Listado() {
                                 title={tile.nombre}
                                 subtitle={<span>Direccion: {tile.direccion}</span>}
                                 actionIcon={
-                                    <IconButton aria-label={`info about ${tile.nombre}`} className={classes.icon} >
-                                        <DoneOutlineRoundedIcon fontSize="large" />
-                                    </IconButton>
+                                    <ReservaForm />
                                 }
                             />
                         </GridListTile>

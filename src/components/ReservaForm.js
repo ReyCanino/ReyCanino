@@ -34,7 +34,7 @@ const options = [
     { title: 'Tienda 8' }
 ]
 const servicios = [
-    { title: 'Peluqeria' },
+    { title: 'Pelqueria' },
     { title: 'Paseo' }
 ]
 
@@ -54,33 +54,22 @@ export default function FormDialog(props) {
         setOpen(false);
     };
 
-    const handleSave = () => {
-        /*if (!tienda.length || !status.length || !name.length || !email.length || !dueDate) {
+    const handleSave = (id) => {
+        console.log("El id ome", id);
+        if (id === 0) {
             return;
         }
-        var newItem = {
-            tienda: tienda,
-            servicio: servicio,
-            dueDate: dueDate,
-            responsible: {
-                name: name,
-                email: email
-            }
-        }
-        props.save(newItem);
-        setStatus("");
         setTienda("");
-        setDueDate(new Date());
-        setName("");
-        setEmail("");
-        setOpen(false)*/
+        setServicio("");
+        setFecha(null);
+        setOpen(false);
     };
 
-    const handleTiendaChange = (e) => {
-        setTienda(e.target.value);
+    const handleTiendaChange = (e, newValue) => {
+        setTienda(newValue.title);
     }
-    const handleServicioChange = (e) => {
-        setServicio(e.target.value);
+    const handleServicioChange = (e, newValue) => {
+        setServicio(newValue.title);
     }
 
     const handleFechaChange = (e) => {
@@ -88,19 +77,22 @@ export default function FormDialog(props) {
     }
 
     const buscarDisponibilidad = (e) => {
+        console.log(tienda, servicio, fecha);
+        if (!tienda.length || !servicio.length || !fecha)
+            return;
         setHorarios([{
             id: 1,
-            fecahini: "fecha ejemplo",
-            fechafin: "fecha ejemplo"
+            horaini: "fecha ejemplo",
+            horafin: "fecha ejemplo"
         },
         {
             id: 2,
-            fechaini: "fecha ejemplo",
-            fechafin: "fecha ejemplo"
+            horaini: "fecha ejemplo",
+            horafin: "fecha ejemplo"
         }, {
             id: 3,
-            fechaini: "fecha ejemplo",
-            fechafin: "fecha ejemplo"
+            horaini: "fecha ejemplo",
+            horafin: "fecha ejemplo"
         }
         ]);
     }
@@ -147,7 +139,7 @@ export default function FormDialog(props) {
                     <Button onClick={buscarDisponibilidad} variant="contained" color="primary">
                         Buscar disponibilidad
                     </Button>
-                    <TablaHorarios key="horarios" horarios={horarios} />
+                    <TablaHorarios key="horarios" horarios={horarios} save={handleSave} />
                 </DialogContent>
             </Dialog>
         </div>

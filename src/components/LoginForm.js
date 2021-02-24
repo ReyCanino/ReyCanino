@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
         top:'50%',
         left:'50%',
         textAlign:'center',
+<<<<<<< HEAD
         position:'center',
+=======
+>>>>>>> 38c1e5d... login finalizado
     },
     button: {
         backgroundColor:'#000',
@@ -42,8 +45,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+<<<<<<< HEAD
 export default function LoginForm(props) {
 
+=======
+export default function LoginForm() {
+>>>>>>> 38c1e5d... login finalizado
 const classes = useStyles();
   
 return (
@@ -76,7 +83,11 @@ return (
                 </FormControl>
                 <div>
                    <Button variant="contained" className={ classes.button } disableElevation>
+<<<<<<< HEAD
                         Ingresar
+=======
+                    Ingresar
+>>>>>>> 38c1e5d... login finalizado
                     </Button>  
                 </div>
                 <div>
@@ -86,7 +97,13 @@ return (
                     <Link
                     component="button"
                     variant="body2"
+<<<<<<< HEAD
                     onClick={() => {props.history.push ('/register')}}
+=======
+                    onClick={() => {
+                        console.info("Crear cuenta");
+                    }}
+>>>>>>> 38c1e5d... login finalizado
                     > Crea tu cuenta
                     </Link> 
                 </div> 

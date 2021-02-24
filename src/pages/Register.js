@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import LoginForm from '../components/LoginForm';
+import RegisterForm from '../components/RegisterForm';
 
-export default class Login extends Component {
+export default class Register extends Component {
     
     render() {
         return (
@@ -13,7 +13,7 @@ export default class Login extends Component {
                 height:'730px',
                 color:'white'
             }}>
-                <LoginForm history={this.props.history}/>
+                <RegisterForm history={this.props.history}/>
             </div>
         );
     }

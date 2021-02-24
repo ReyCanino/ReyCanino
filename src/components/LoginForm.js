@@ -41,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function LoginForm() {
+export default function LoginForm(props) {
+
 const classes = useStyles();
   
 return (
@@ -74,7 +75,7 @@ return (
                 </FormControl>
                 <div>
                    <Button variant="contained" className={ classes.button } disableElevation>
-                    Ingresar
+                        Ingresar
                     </Button>  
                 </div>
                 <div>
@@ -84,9 +85,7 @@ return (
                     <Link
                     component="button"
                     variant="body2"
-                    onClick={() => {
-                        console.info("Crear cuenta");
-                    }}
+                    onClick={() => {props.history.push ('/register')}}
                     > Crea tu cuenta
                     </Link> 
                 </div> 

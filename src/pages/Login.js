@@ -5,6 +5,7 @@ export default class Login extends Component {
     
     render() {
         return (
+<<<<<<< HEAD
             <container>
                 <div 
                 style={{
@@ -19,6 +20,18 @@ export default class Login extends Component {
             </container>
             
 
+=======
+            <div 
+            style={{
+                backgroundImage: `url("../fondo-login.png")`,
+                backgroundRepeat: 'no-repeat',
+                width:'1250',
+                height:'730px',
+                color:'white'
+            }}>
+                <LoginForm history={this.props.history}/>
+            </div>
+>>>>>>> 4d9b1e0... Registro final
         );
     }
 }

@@ -8,10 +8,9 @@ export default class Register extends Component {
             <div 
             style={{
                 backgroundImage: `url("../fondo-login.png")`,
-                backgroundRepeat: 'no-repeat',
-                width:'1250',
-                height:'730px',
-                color:'white'
+                    backgroundSize:'cover',
+                    backgroundRepeat: 'no-repeat',
+                    height: "100vh"   
             }}>
                 <RegisterForm history={this.props.history}/>
             </div>

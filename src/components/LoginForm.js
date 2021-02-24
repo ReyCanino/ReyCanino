@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
         top:'50%',
         left:'50%',
         textAlign:'center',
+        position:'center',
     },
     button: {
         backgroundColor:'#000',

@@ -100,29 +100,29 @@ export default function ListImage(props) {
         <h1>Servicios</h1>
         {images.map((image) => (
             <ButtonBase
-            focusRipple
-            key={image.title}
-            className={classes.image}
-            focusVisibleClassName={classes.focusVisible}
-            style={{
-                width: image.width,
-        }}>
-        <span
-            className={classes.imageSrc}
-            style={{
-              backgroundImage: `url(${image.url})`,
-        }}/>
-        <span className={classes.imageBackdrop} />
-        <span className={classes.imageButton}>
+              focusRipple
+              key={image.title}
+              className={classes.image}
+              focusVisibleClassName={classes.focusVisible}
+              style={{
+                  width: image.width,
+            }}>
+            <span
+                className={classes.imageSrc}
+                style={{
+                  backgroundImage: `url(${image.url})`,
+            }}/>
+            <span className={classes.imageBackdrop} />
+            <span className={classes.imageButton}>
             <Typography
-                component="span"
-                variant="subtitle1"
-                color="inherit"
-                className={classes.imageTitle}
+              component="span"
+              variant="subtitle1"
+              color="inherit"
+              className={classes.imageTitle}
             >
-                {image.title}
-                <span className={classes.imageMarked} />
-                <ReservaForm history={props.history} />
+              {image.title}
+              <span className={classes.imageMarked} />
+              <ReservaForm history={props.history} />
             </Typography>
           </span>
         </ButtonBase>

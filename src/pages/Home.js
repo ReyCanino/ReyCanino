@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Menu from '../components/Menu'
-import ListImage from '../components/ListImage'
-import Lista from '../components/Lista'
+import Menu from '../components/Menu';
+import ListImage from '../components/ListImage';
+import Lista from '../components/Lista';
+import Example from '../components/CarouselImg';
 
 export default class Login extends Component {
 
@@ -9,6 +10,7 @@ export default class Login extends Component {
         return (
             <div>
                 <Menu/>
+                <Example></Example>
                 <ListImage/>
                 <Lista history={this.props.history} />
             </div>

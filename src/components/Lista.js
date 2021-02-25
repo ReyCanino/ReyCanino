@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import Typography from '@material-ui/core/Typography';
 import tiendas from "../sample/Tiendas";
 import ReservaForm from '../components/ReservaForm';
 
@@ -12,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
+        textAlign:'center',
+        position:'center',
     },
     gridList: {
         width: "90%",
@@ -29,9 +29,9 @@ export default function Lista(props) {
         <div className={classes.root}>
             <GridList cellHeight={400} className={classes.gridList}>
                 <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }} >
-                    <Typography variant="h4" component="h2">
+                    <h1>
                         Tiendas Caninas
-                    </Typography>
+                    </h1>
                 </GridListTile>
                 {tiendas.map((tile) => (
                     <GridListTile key={tile.img}>

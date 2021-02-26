@@ -13,12 +13,9 @@ export default class Login extends Component {
                     backgroundRepeat: 'no-repeat',
                     height: "100vh"                    
                     }}>
-              
                     <LoginForm history={this.props.history}/>
                 </div>
             </container>
-            
-
         );
     }
 }

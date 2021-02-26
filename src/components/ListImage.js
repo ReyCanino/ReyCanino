@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.black,
     opacity: 0.4,
     transition: theme.transitions.create('opacity'),
-    margin:'40px',
+    margin:'10px',
   },
   imageTitle: {
     position: 'relative',

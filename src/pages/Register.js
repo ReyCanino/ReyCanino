@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RegisterForm from '../components/RegisterForm';
+import FormRegister from '../components/FormRegister';
 
 export default class Register extends Component {
     
@@ -12,7 +12,7 @@ export default class Register extends Component {
                     backgroundRepeat: 'no-repeat',
                     height: "100vh"   
             }}>
-                <RegisterForm history={this.props.history}/>
+                <FormRegister history={this.props.history}/>
             </div>
         );
     }

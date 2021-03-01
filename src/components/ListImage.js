@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ReservaForm from '../components/ReservaForm';
+
 
 const images = [
   {
@@ -21,14 +22,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 400,
     width: '100%',
-    textAlign:'center',
-    position:'center',
+    textAlign: 'center',
+    position: 'center',
   },
   image: {
     position: 'relative',
     height: 200,
     [theme.breakpoints.down('xs')]: {
-      width: '100% !important', 
+      width: '100% !important',
       height: 100,
     },
     '&:hover, &$focusVisible': {
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     backgroundSize: 'cover',
     backgroundPosition: 'center 40%',
-    margin:'10px',
+    margin: '10px',
   },
   imageBackdrop: {
     position: 'absolute',
@@ -75,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.black,
     opacity: 0.4,
     transition: theme.transitions.create('opacity'),
-    margin:'40px',
+    margin: '10px',
   },
   imageTitle: {
     position: 'relative',
@@ -94,39 +95,45 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ListImage(props) {
   const classes = useStyles();
-
   return (
-    <div className={classes.root} >
-        <h1>Servicios</h1>
-        {images.map((image) => (
-            <ButtonBase
-              focusRipple
-              key={image.title}
-              className={classes.image}
-              focusVisibleClassName={classes.focusVisible}
-              style={{
-                  width: image.width,
-            }}>
-            <span
-                className={classes.imageSrc}
+    <div>
+      <Grid container className={classes.root} spacing={2}>
+        <Grid item xs={12}>
+          <Grid container justify="center" spacing={2}>
+            <h1>Servicios</h1>
+          </Grid>
+          <Grid container justify="center" spacing={2}>
+            {images.map((image) => (
+              <div
+                key={image.title}
+                className={classes.image}
+                focusvisibleclassname={classes.focusVisible}
                 style={{
-                  backgroundImage: `url(${image.url})`,
-            }}/>
-            <span className={classes.imageBackdrop} />
-            <span className={classes.imageButton}>
-            <Typography
-              component="span"
-              variant="subtitle1"
-              color="inherit"
-              className={classes.imageTitle}
-            >
-              {image.title}
-              <span className={classes.imageMarked} />
-              <ReservaForm history={props.history} />
-            </Typography>
-          </span>
-        </ButtonBase>
-      ))}
+                  width: image.width,
+                }}>
+                <span
+                  className={classes.imageSrc}
+                  style={{
+                    backgroundImage: `url(${image.url})`,
+                  }} />
+                <span className={classes.imageBackdrop} />
+                <span className={classes.imageButton}>
+                  <Typography
+                    component="span"
+                    variant="subtitle1"
+                    color="inherit"
+                    className={classes.imageTitle}
+                  >
+                    {image.title}
+                    <span className={classes.imageMarked} />
+                    <ReservaForm history={props.history} />
+                  </Typography>
+                </span>
+              </div>
+            ))}
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   );
 }

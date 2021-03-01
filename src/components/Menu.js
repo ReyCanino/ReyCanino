@@ -20,10 +20,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import HomeIcon from '@material-ui/icons/Home';
 import Avatar from '@material-ui/core/Avatar';
 import StoreIcon from '@material-ui/icons/Store';
-import { isLogin } from '../utils';
-import { login } from '../utils';
-import { logout } from '../utils';
-
+import { isLogin, login, logout } from '../utils';
 
 const drawerWidth = 240;
 

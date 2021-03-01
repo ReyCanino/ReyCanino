@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import Menu from '../components/Menu';
 import ListImage from '../components/ListImage';
 import Lista from '../components/Lista';
-import Example from '../components/CarouselImg';
+import Carousel from '../components/CarouselImg';
 import Footer from '../components/Footer';
 export default class Login extends Component {
 
     render() {
         return (
             <div>
-                <Menu/>
-                <Example></Example>
-                <ListImage/>
+                <Menu />
+                <Carousel />
+                <ListImage history={this.props.history} />
                 <Lista history={this.props.history} />
-                <Footer/>
+                <Footer />
             </div>
         );
     }

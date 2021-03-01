@@ -11,11 +11,11 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
-        textAlign:'center',
-        position:'center',
+        textAlign: 'center',
+        position: 'center',
     },
     gridList: {
-        width: "90%",
+        width: "65%",
     },
     icon: {
         color: 'rgba(255, 255, 255, 0.54)',

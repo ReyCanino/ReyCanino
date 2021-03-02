@@ -14,7 +14,7 @@ class App extends Component {
           <Route path="/" component={Home} exact />
           <Route path="/login" component={Login} exact />
           <Route path="/register" component={Register} exact />
-          <Route path="/reservations" component={Reservations} exact />
+          <Route path="/client-reservations" component={Reservations} exact />
         </Switch>
       </Router >
     );

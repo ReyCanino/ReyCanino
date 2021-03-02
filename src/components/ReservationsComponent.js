@@ -10,8 +10,9 @@ import Paper from '@material-ui/core/Paper';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: '#757575',
     color: theme.palette.common.white,
+    fontSize: 20,
   },
   body: {
     fontSize: 14,
@@ -31,16 +32,17 @@ function createData(name, date, hour, value, store) {
 }
 
 const rows = [
-  createData('Corte de pelo', '01/03/2021', '11:30', 20000, 'Tienda 1'),
-  createData('Corte de pelo', '01/03/2021', '11:30', 20000, 'Tienda 2'),
-  createData('Corte de pelo', '01/03/2021', '11:30', 20000, 'Tienda 3'),
-  createData('Corte de pelo', '01/03/2021', '11:30', 20000, 'Tienda 4'),
-  createData('Corte de pelo', '01/03/2021', '11:30', 20000, 'Tienda 5'),
+  createData('Peluquería', '01/03/2021', '11:30', 20000, 'Tienda 1'),
+  createData('Paseo', '01/03/2021', '11:30', 20000, 'Tienda 2'),
+  createData('Peluquería', '01/03/2021', '11:30', 20000, 'Tienda 3'),
+  createData('Paseo', '01/03/2021', '11:30', 20000, 'Tienda 4'),
+  createData('Peluquería', '01/03/2021', '11:30', 20000, 'Tienda 5'),
 ];
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
+    minWidth: 200,
+
   },
 });
 
@@ -52,7 +54,7 @@ export default function ReservationsComponent() {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Reserva</StyledTableCell>
+            <StyledTableCell>Servicio</StyledTableCell>
             <StyledTableCell align="right">Fecha</StyledTableCell>
             <StyledTableCell align="right">Hora</StyledTableCell>
             <StyledTableCell align="right">Costo</StyledTableCell>

@@ -17,6 +17,13 @@ export default class Reservation extends Component {
 
                 }}>
                     <Menu />
+                    <h2 style={{
+                            color:"#FFFFFF",
+                            textAlign:'center',
+                            fontWeight: 'bold',
+                            fontSize:'20',
+                            
+                        }}>Registro de Reservaciones</h2>
                     <Container maxWidth="md">
                         <ManageReservations history={this.props.history}/>
                     </Container>

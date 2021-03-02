@@ -10,7 +10,7 @@ export default class Reservation extends Component {
             <container maxWidth="sm">
                 
                 <div  style={{
-                    backgroundImage: `url("../fondo-login.png")`,
+                    backgroundImage: `url("../client-reservation2.jpg")`,
                     backgroundSize:'cover',
                     backgroundRepeat: 'no-repeat',
                     height: "100vh"                     

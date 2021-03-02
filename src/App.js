@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Reservations from './pages/Reservations';
+import Manage from './pages/Manage';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
           <Route path="/login" component={Login} exact />
           <Route path="/register" component={Register} exact />
           <Route path="/client-reservations" component={Reservations} exact />
+          <Route path="/manage-reservations" component={Manage} exact />
         </Switch>
       </Router >
     );

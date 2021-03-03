@@ -8,7 +8,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-/**format: (value) => value.toLocaleString('en-US') */
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: '#757575',

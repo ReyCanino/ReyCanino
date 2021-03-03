@@ -3,7 +3,7 @@ import Menu from '../components/Menu';
 import ManageReservations from '../components/MaganeReservations';
 import {Container} from '@material-ui/core';
 
-export default class manage extends Component {
+export default class Manage extends Component {
 
     render() {
         return (

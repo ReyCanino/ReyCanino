@@ -66,7 +66,7 @@ const useStyles = makeStyles({
 
 });
 
-export default function StickyHeadTable() {
+export default function ManageReservations() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

@@ -3,7 +3,7 @@ import Menu from '../components/Menu';
 import ManageReservations from '../components/MaganeReservations';
 import {Container} from '@material-ui/core';
 
-export default class Reservation extends Component {
+export default class manage extends Component {
 
     render() {
         return (
@@ -33,3 +33,4 @@ export default class Reservation extends Component {
         );
     }
 }
+

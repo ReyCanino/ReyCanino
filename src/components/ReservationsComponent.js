@@ -8,6 +8,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AlarmIcon from '@material-ui/icons/Alarm';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+
+
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: '#757575',
@@ -59,6 +65,8 @@ export default function ReservationsComponent() {
             <StyledTableCell align="right">Hora</StyledTableCell>
             <StyledTableCell align="right">Costo</StyledTableCell>
             <StyledTableCell align="right">Tienda</StyledTableCell>
+            <StyledTableCell size="small" align="right"></StyledTableCell>
+            <StyledTableCell size="small" align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -71,6 +79,19 @@ export default function ReservationsComponent() {
               <StyledTableCell align="right">{row.hour}</StyledTableCell>
               <StyledTableCell align="right">{row.value}</StyledTableCell>
               <StyledTableCell align="right">{row.store}</StyledTableCell>
+              <StyledTableCell align="right" size="small">
+                <IconButton aria-label="Cancelar">
+                  <DeleteIcon />
+                </IconButton>
+              </StyledTableCell>
+
+              <StyledTableCell align="right" size="small">
+                <IconButton color="secondary" aria-label="add an alarm">
+                  <AlarmIcon />
+                </IconButton>
+              </StyledTableCell>
+
+
             </StyledTableRow>
           ))}
         </TableBody>

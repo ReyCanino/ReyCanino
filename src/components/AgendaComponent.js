@@ -36,10 +36,6 @@ const rows = [
   createData('Paseo', '01/03/2021', '8:30', '16:30'),
   createData('Peluquería', '11/03/2021', '10:00', '20:30'),
   createData('Paseo', '11/03/2021', '8:00', '18:30'),
-  createData('Peluquería', '12/03/2021', '7:30', '18:30'),
-  createData('Paseo', '12/03/2021', '9:00', '16:00'),
-  createData('Peluquería', '13/03/2021', '7:00', '18:00'),
-  createData('Paseo', '13/03/2021', '10:00', '17:00'),
 ];
 
 const useStyles = makeStyles({

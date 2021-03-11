@@ -9,7 +9,7 @@ export default class AgendaAdmin extends Component {
         return (
             <container maxWidth="sm">
                 <div  style={{
-                    backgroundImage: `url("../calendario.jpeg")`,
+                    backgroundImage: `url("../calendario.jpg")`,
                     backgroundSize:'cover',
                     backgroundRepeat: 'no-repeat',
                     height: "100vh"                     
@@ -18,7 +18,7 @@ export default class AgendaAdmin extends Component {
                     <Menu />
                     <Container maxWidth="md">
                         <h2 style={{
-                            color:"#FFFFFF",
+                            color:"#000000",
                             textAlign:'center',
                             fontWeight: 'bold',
                             fontSize:'20',

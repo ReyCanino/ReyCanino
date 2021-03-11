@@ -49,7 +49,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ReservationsComponent() {
+export default function AgendaComponent() {
   const classes = useStyles();
 
   return (
@@ -71,8 +71,7 @@ export default function ReservationsComponent() {
               </StyledTableCell>
               <StyledTableCell align="right">{row.date}</StyledTableCell>
               <StyledTableCell align="right">{row.hour}</StyledTableCell>
-              <StyledTableCell align="right">{row.value}</StyledTableCell>
-              <StyledTableCell align="right">{row.store}</StyledTableCell>
+              <StyledTableCell align="right">{row.hour}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

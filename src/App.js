@@ -17,6 +17,7 @@ class App extends Component {
           <Route path="/register" component={Register} exact />
           <Route path="/client-reservations" component={Reservations} exact />
           <Route path="/manage-reservations" component={Manage} exact />
+		  <Route path="/manage-reservations" component={AgendaAdmin} exact />
         </Switch>
       </Router >
     );

@@ -11,5 +11,7 @@
 
 /login
 /register
-
+/client-reservations
+/manage-reservations
+/agenda-administrador
 ```

@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
     button: {
         color: '#000',
         backgroundColor: "#fff"
+    },
+    buscar: {
+        color: '#fff',
+        backgroundColor: "#000"
     }
 }));
 
@@ -144,7 +148,7 @@ export default function FormDialog(props) {
                         onChange={handleFechaChange}
                         fullWidth
                     />
-                    <Button onClick={buscarDisponibilidad} variant="contained" color="primary">
+                    <Button onClick={buscarDisponibilidad} variant="contained" className={classes.buscar}>
                         Buscar disponibilidad
                     </Button>
                     <TablaHorarios key="horarios" horarios={horarios} save={handleSave} />

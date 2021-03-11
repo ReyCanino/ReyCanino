@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import FormRegister from '../components/FormRegister';
 
 test('renders learn react link', () => {
-  render(<App />);
+  render(<FormRegister />);
   const linkElement = screen.getByText(/rey canino/i);
   expect(linkElement).toBeInTheDocument();
 });

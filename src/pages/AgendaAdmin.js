@@ -25,7 +25,7 @@ export default class AgendaAdmin extends Component {
                             
                         }}>Agenda Disponible</h2>
 
-                        <ReservationsComponent maxWidth="md" history={this.props.history}/>
+                        <AgendaComponent maxWidth="md" history={this.props.history}/>
                     </Container>
                     
                 </div>

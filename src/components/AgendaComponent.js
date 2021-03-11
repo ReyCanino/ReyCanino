@@ -28,7 +28,7 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 function createData(name, date, sHour, fHour) {
-  return { name, date, hour, hour };
+  return { name, date, sHour, fHour };
 }
 
 const rows = [
@@ -70,8 +70,8 @@ export default function AgendaComponent() {
                 {row.name}
               </StyledTableCell>
               <StyledTableCell align="right">{row.date}</StyledTableCell>
-              <StyledTableCell align="right">{row.hour}</StyledTableCell>
-              <StyledTableCell align="right">{row.hour}</StyledTableCell>
+              <StyledTableCell align="right">{row.sHour}</StyledTableCell>
+              <StyledTableCell align="right">{row.fHour}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

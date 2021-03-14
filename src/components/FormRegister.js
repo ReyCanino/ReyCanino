@@ -30,7 +30,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={2}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -171,7 +171,7 @@ export default function TabSelect(props) {
             <FormControl className={classes.form}>
               <InputLabel htmlFor="pwd" >Repita la contraseña</InputLabel>
               <Input
-                id="pwd"
+                id="pwd2"
                 type="password"
                 startAdornment={
                   <InputAdornment position="start">
@@ -247,7 +247,7 @@ export default function TabSelect(props) {
             <FormControl className={classes.form}>
               <InputLabel htmlFor="pwd" >Repita la contraseña</InputLabel>
               <Input
-                id="pwd"
+                id="pwd2"
                 type="password"
                 startAdornment={
                   <InputAdornment position="start">

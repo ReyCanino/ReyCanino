@@ -7,7 +7,7 @@ export default class Reservation extends Component {
 
     render() {
         return (
-            <container maxWidth="sm">
+            <Container maxWidth="sm">
 
                 <div style={{
                     backgroundImage: `url("../client-reservation2.jpg")`,
@@ -16,7 +16,7 @@ export default class Reservation extends Component {
                     height: "100vh"
 
                 }} >
-                    <Menu history={this.props.history} />
+                    <Menu />
                     <Container maxWidth="md">
                         <h2 style={{
                             color: "#FFFFFF",
@@ -30,7 +30,7 @@ export default class Reservation extends Component {
                     </Container>
 
                 </div>
-            </container>
+            </Container>
         );
     }
 }

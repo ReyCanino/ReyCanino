@@ -66,7 +66,6 @@ export default function FormDialog(props) {
     };
 
     const handleSave = (id) => {
-        console.log("El id ome", id);
         if (id === 0) {
             return;
         }

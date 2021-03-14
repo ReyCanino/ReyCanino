@@ -58,7 +58,7 @@ export default function ReservationsComponent(props) {
 
   useEffect(() => {
     if (getUser().type !== "regular") {
-      props.history.push("/");
+      window.location.replace("/")
     }
   });
 

@@ -83,7 +83,7 @@ export default function ManageReservations(props) {
 
   useEffect(() => {
     if (getUser().type !== "admin") {
-      props.history.push("/");
+      window.location.replace("/")
     }
   });
 

@@ -7,6 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import VpnKeySharpIcon from '@material-ui/icons/VpnKeySharp';
 import Button from '@material-ui/core/Button';
+import { login, isLogin } from '../utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,13 +46,36 @@ const useStyles = makeStyles((theme) => ({
 export default function LoginForm(props) {
 
     const classes = useStyles();
+    const [error, setError] = React.useState(false);
+    const [email, setEmail] = React.useState("");
+    const [passw, setPassw] = React.useState("");
 
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value)
+    }
+
+    const handlePasswChange = (event) => {
+        setPassw(event.target.value);
+    }
+    const handleLogin = () => {
+        login(email, passw);
+        if (isLogin()) {
+            props.history.push("/");
+        } else {
+            setError(true);
+        }
+    }
     return (
         <div className={classes.root} >
             <Paper className={classes.paper}>
                 <Grid>
                     <h1>Bienvenido</h1>
                     <img src="/logo-gr.png" width='200' alt="Rey canino logo" className={classes.image} />
+                    {error && <Typography variant="subtitle1" component="h2" color="error">
+                        usuario o contraseña invalidos
+                    </Typography>}
+
                     <FormControl className={classes.form} >
                         <InputLabel htmlFor="user">Nombre de usuario</InputLabel>
                         <Input
@@ -61,6 +85,7 @@ export default function LoginForm(props) {
                                     <AccountCircle />
                                 </InputAdornment>
                             }
+                            onChange={handleEmailChange}
                         />
                     </FormControl>
                     <FormControl className={classes.form}>
@@ -72,10 +97,11 @@ export default function LoginForm(props) {
                                 <InputAdornment position="start">
                                     <VpnKeySharpIcon />
                                 </InputAdornment>
-                            } />
+                            }
+                            onChange={handlePasswChange} />
                     </FormControl>
                     <div>
-                        <Button variant="contained" className={classes.button} disableElevation>
+                        <Button variant="contained" className={classes.button} disableElevation onClick={handleLogin}>
                             Ingresar
                         </Button>
                     </div>

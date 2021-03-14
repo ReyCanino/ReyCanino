@@ -1,10 +1,12 @@
 import './App.css';
 import React, { Component } from 'react';
+import PrivateRoute from './components/PrivateRoute'
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Reservations from './pages/Reservations';
 import Manage from './pages/Manage';
+import NotFound from './pages/NotFound';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
@@ -15,8 +17,9 @@ class App extends Component {
           <Route path="/" component={Home} exact />
           <Route path="/login" component={Login} exact />
           <Route path="/register" component={Register} exact />
-          <Route path="/client-reservations" component={Reservations} exact />
-          <Route path="/manage-reservations" component={Manage} exact />
+          <PrivateRoute path="/client-reservations" component={Reservations} exact />
+          <PrivateRoute path="/manage-reservations" component={Manage} exact />
+          <Route component={NotFound} />
         </Switch>
       </Router >
     );

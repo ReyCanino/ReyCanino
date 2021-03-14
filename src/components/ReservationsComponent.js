@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,7 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AlarmIcon from '@material-ui/icons/Alarm';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+
+import { getUser } from '../utils';
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -33,16 +34,16 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(name, date, hour, value, store) {
-  return { name, date, hour, value, store };
+function createData(id, name, date, hour, value, store) {
+  return { id, name, date, hour, value, store };
 }
 
 const rows = [
-  createData('Peluquería', '01/03/2021', '11:30', 20000, 'Tienda 1'),
-  createData('Paseo', '01/03/2021', '11:30', 20000, 'Tienda 2'),
-  createData('Peluquería', '01/03/2021', '11:30', 20000, 'Tienda 3'),
-  createData('Paseo', '01/03/2021', '11:30', 20000, 'Tienda 4'),
-  createData('Peluquería', '01/03/2021', '11:30', 20000, 'Tienda 5'),
+  createData(1, 'Peluquería', '01/03/2021', '11:30', 20000, 'Tienda 1'),
+  createData(2, 'Paseo', '01/03/2021', '11:30', 20000, 'Tienda 2'),
+  createData(3, 'Peluquería', '01/03/2021', '11:30', 20000, 'Tienda 3'),
+  createData(4, 'Paseo', '01/03/2021', '11:30', 20000, 'Tienda 4'),
+  createData(5, 'Peluquería', '01/03/2021', '11:30', 20000, 'Tienda 5'),
 ];
 
 const useStyles = makeStyles({
@@ -52,8 +53,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ReservationsComponent() {
+export default function ReservationsComponent(props) {
   const classes = useStyles();
+
+  useEffect(() => {
+    if (getUser().type !== "regular") {
+      props.history.push("/");
+    }
+  });
 
   return (
     <TableContainer component={Paper}>
@@ -71,7 +78,7 @@ export default function ReservationsComponent() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+            <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>

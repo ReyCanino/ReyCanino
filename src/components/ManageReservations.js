@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import { getUser } from '../utils';
 
 const columns = [
   { id: 'name', label: 'Nombre', minWidth: 170 },
@@ -17,14 +18,14 @@ const columns = [
     label: 'Hora',
     minWidth: 170,
     align: 'right',
-    
+
   },
   {
     id: 'pet',
     label: 'Mascota',
     minWidth: 170,
     align: 'right',
-    
+
   },
   {
     id: 'service',
@@ -34,26 +35,26 @@ const columns = [
   },
 ];
 
-function createData(name, date, hour, pet, service) {
-  return { name, date, hour, pet, service};
+function createData(id, name, date, hour, pet, service) {
+  return { id, name, date, hour, pet, service };
 }
 
 const rows = [
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
-  createData('Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(1, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(2, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(3, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(4, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(5, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(6, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(7, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(8, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(9, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(10, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(11, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(12, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(13, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(14, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
+  createData(15, 'Miguel Casteellanos', '02/03/2021', '12:30', 'Perro', 'Peluquería'),
 ];
 
 const useStyles = makeStyles({
@@ -66,7 +67,7 @@ const useStyles = makeStyles({
 
 });
 
-export default function ManageReservations() {
+export default function ManageReservations(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -80,6 +81,12 @@ export default function ManageReservations() {
     setPage(0);
   };
 
+  useEffect(() => {
+    if (getUser().type !== "admin") {
+      props.history.push("/");
+    }
+  });
+
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
@@ -90,9 +97,9 @@ export default function ManageReservations() {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ 
-                      minWidth: column.minWidth,
-                      fontWeight: 'bold',
+                  style={{
+                    minWidth: column.minWidth,
+                    fontWeight: 'bold',
                   }}
                 >
                   {column.label}
@@ -103,7 +110,7 @@ export default function ManageReservations() {
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (

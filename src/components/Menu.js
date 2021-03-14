@@ -19,8 +19,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import HomeIcon from '@material-ui/icons/Home';
 import Avatar from '@material-ui/core/Avatar';
-import StoreIcon from '@material-ui/icons/Store';
-import { isLogin, login, logout } from '../utils';
+import { isLogin, logout, getUser } from '../utils';
 
 const drawerWidth = 240;
 
@@ -100,10 +99,23 @@ export default function PersistentDrawerLeft(props) {
     const handleOnClick = () => {
         logout();
         setLogin(isLogin());
+        props.history.push("/")
     }
     const hangleLogin = () => {
-        login();
-        setLogin(isLogin());
+        props.history.push("/login")
+    }
+
+    const handleProfile = () => {
+        var user = getUser();
+        var route = "/";
+        console.log(user);
+        if (user.type === "admin") {
+            route = "/manage-reservations"
+        } else if (user.type === "regular") {
+            route = "/client-reservations"
+        }
+        console.log(route);
+        props.history.push(route)
     }
 
     return (
@@ -148,13 +160,9 @@ export default function PersistentDrawerLeft(props) {
                 </div>
                 <Divider />
                 <List>
-                    <ListItem button key={'Home'}>
+                    <ListItem button key={'Home'} onClick={() => { props.history.push("/") }}>
                         <ListItemIcon><HomeIcon /></ListItemIcon>
                         <ListItemText primary={"Home"} />
-                    </ListItem>
-                    <ListItem button key={'Services'}>
-                        <ListItemIcon><StoreIcon /></ListItemIcon>
-                        <ListItemText primary={"Servicios"} />
                     </ListItem>
                 </List>
                 <Divider />
@@ -162,7 +170,7 @@ export default function PersistentDrawerLeft(props) {
                     isLoggedIn &&
                     <div>
                         <List>
-                            <ListItem button key={'User'}>
+                            <ListItem button key={'User'} onClick={handleProfile}>
                                 <ListItemIcon><AccountBoxIcon /></ListItemIcon>
                                 <ListItemText primary={localStorage.getItem('user')} />
                             </ListItem>

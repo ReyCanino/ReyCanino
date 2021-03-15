@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from "react";
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -19,12 +20,11 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import HomeIcon from '@material-ui/icons/Home';
 import Avatar from '@material-ui/core/Avatar';
-import StoreIcon from '@material-ui/icons/Store';
-import { isLogin, login, logout } from '../utils';
+import { isLogin, logout, getUser } from '../utils';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
     root: {
         display: 'flex',
     },
@@ -80,123 +80,139 @@ const useStyles = makeStyles((theme) => ({
         }),
         marginLeft: 0,
     },
-}));
+});
 
 
-export default function PersistentDrawerLeft(props) {
-    const classes = useStyles();
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-    const [isLoggedIn, setLogin] = React.useState(isLogin());
+class Menu extends Component {
+    state = {
+        open: false,
+        isLoggedIn: isLogin()
+    }
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
+    handleDrawerOpen = () => {
+        this.setState({ open: true });
     };
 
-    const handleDrawerClose = () => {
-        setOpen(false);
+    handleDrawerClose = () => {
+        this.setState({ open: false });
     };
 
-    const handleOnClick = () => {
+    handleOnClick = () => {
         logout();
-        setLogin(isLogin());
+        this.setState({ isLoggedIn: isLogin() });
+        window.location = "/";
     }
-    const hangleLogin = () => {
-        login();
-        setLogin(isLogin());
+    handleLogin = () => {
+        window.location = "/login";
     }
 
-    return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <AppBar
-                position="fixed"
-                className={clsx(classes.appBar, {
-                    [classes.appBarShift]: open,
-                })}
-            >
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, open && classes.hide)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Avatar alt="Remy Sharp" src="/logo.png" />
-                    <Typography variant="h6" noWrap>
-                        Rey canino
+    handleProfile = () => {
+        var user = getUser();
+        var route = "/";
+        if (user.type === "admin") {
+            route = "/manage-reservations"
+        } else if (user.type === "regular") {
+            route = "/client-reservations"
+        }
+        window.location = route;
+    }
+    render() {
+        const { classes } = this.props;
+        return (
+            <div className={classes.root}>
+                <CssBaseline />
+                <AppBar
+                    position="fixed"
+                    className={clsx(classes.appBar, {
+                        [classes.appBarShift]: this.state.open,
+                    })}
+                >
+                    <Toolbar>
+                        <IconButton
+                            id="menuButton"
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={this.handleDrawerOpen}
+                            edge="start"
+                            className={clsx(classes.menuButton, this.state.open && classes.hide)}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Avatar alt="Remy Sharp" src="/logo.png" />
+                        <Typography variant="h6" noWrap>
+                            Rey canino
                     </Typography>
-                </Toolbar>
+                    </Toolbar>
 
-            </AppBar>
-            <Drawer
-                className={classes.drawer}
-                variant="persistent"
-                anchor="left"
-                open={open}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <div className={classes.drawerHeader}>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>
-                    <ListItem button key={'Home'}>
-                        <ListItemIcon><HomeIcon /></ListItemIcon>
-                        <ListItemText primary={"Home"} />
-                    </ListItem>
-                    <ListItem button key={'Services'}>
-                        <ListItemIcon><StoreIcon /></ListItemIcon>
-                        <ListItemText primary={"Servicios"} />
-                    </ListItem>
-                </List>
-                <Divider />
-                {
-                    isLoggedIn &&
-                    <div>
-                        <List>
-                            <ListItem button key={'User'}>
-                                <ListItemIcon><AccountBoxIcon /></ListItemIcon>
-                                <ListItemText primary={localStorage.getItem('user')} />
-                            </ListItem>
-                        </List>
-                        <Divider />
-                        <List>
-                            <ListItem button key={'logout'}>
-                                <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-                                <ListItemText onClick={handleOnClick} primary={'Logout'} />
-                            </ListItem>
-                        </List>
+                </AppBar>
+                <Drawer
+                    className={classes.drawer}
+                    variant="persistent"
+                    anchor="left"
+                    open={this.state.open}
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                >
+                    <div className={classes.drawerHeader}>
+                        <IconButton onClick={this.handleDrawerClose} id="botonVolver">
+                            {classes.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        </IconButton>
                     </div>
-                }
-                {
-                    !isLoggedIn &&
-                    <div>
-                        <List>
-                            <ListItem button key={'Login'}>
-                                <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-                                <ListItemText onClick={hangleLogin} primary={'Login'} />
-                            </ListItem>
-                        </List>
-                    </div>
-                }
+                    <Divider />
+                    <List>
+                        <ListItem button id="botonHome" key={'Home'} onClick={() => { window.location = "/" }}>
+                            <ListItemIcon><HomeIcon /></ListItemIcon>
+                            <ListItemText primary={"Home"} />
+                        </ListItem>
+                    </List>
+                    <Divider />
+                    {
+                        this.state.isLoggedIn &&
+                        <div>
+                            <List>
+                                <ListItem button id="botonUser" key={'User'} onClick={this.handleProfile}>
+                                    <ListItemIcon><AccountBoxIcon /></ListItemIcon>
+                                    <ListItemText primary={localStorage.getItem('user')} />
+                                </ListItem>
+                            </List>
+                            <Divider />
+                            <List>
+                                <ListItem button id="botonLogout" key={'logout'} onClick={this.handleOnClick}>
+                                    <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+                                    <ListItemText primary={'Logout'} />
+                                </ListItem>
+                            </List>
+                        </div>
+                    }
+                    {
+                        !this.state.isLoggedIn &&
+                        <div>
+                            <List>
+                                <ListItem button id="botonLogin" key={'Login'} onClick={this.handleLogin}>
+                                    <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+                                    <ListItemText primary={'Login'} />
+                                </ListItem>
+                            </List>
+                        </div>
+                    }
 
 
-            </Drawer>
-            <main
-                className={clsx(classes.content, {
-                    [classes.contentShift]: open,
-                })}
-            >
-                <div className={classes.drawerHeader} />
-            </main>
-        </div>
-    );
+                </Drawer>
+                <main
+                    className={clsx(classes.content, {
+                        [classes.contentShift]: this.state.open,
+                    })}
+                >
+                    <div className={classes.drawerHeader} />
+                </main>
+            </div>
+        );
+    }
 }
+
+Menu.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Menu);

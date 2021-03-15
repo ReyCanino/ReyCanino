@@ -9,7 +9,7 @@ export default class Login extends Component {
     render() {
         return (
             <div>
-                <Menu />
+                <Menu history={this.props.history} />
                 <Carousel />
                 <ListImage history={this.props.history} />
                 <Lista history={this.props.history} />

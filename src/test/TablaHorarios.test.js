@@ -1,5 +1,4 @@
 import { render, unmountComponentAtNode } from "react-dom";
-import { fireEvent } from '@testing-library/react'
 import { act } from "react-dom/test-utils";
 import TablaHorarios from '../components/TablaHorarios';
 

@@ -101,7 +101,7 @@ export default function LoginForm(props) {
                             onChange={handlePasswChange} />
                     </FormControl>
                     <div>
-                        <Button variant="contained" className={classes.button} disableElevation onClick={handleLogin}>
+                        <Button id="botonIngresar" variant="contained" className={classes.button} disableElevation onClick={handleLogin}>
                             Ingresar
                         </Button>
                     </div>
@@ -110,14 +110,15 @@ export default function LoginForm(props) {
                             ¿Eres nuevo en Rey Canino?
                         </Typography>
                         <Link
+                            id="botonRegistrarse"
                             component="button"
                             variant="body2"
-                            onClick={() => { props.history.push('/register') }}
+                            onClick={() => { window.location = '/register' }}
                         > Crea tu cuenta
                         </Link>
                     </div>
                 </Grid>
             </Paper>
-        </div>
+        </div >
     );
 }

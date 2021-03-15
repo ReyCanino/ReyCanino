@@ -21,7 +21,6 @@ export const login = (email, password) => {
             loginUser = user;
         }
     })
-    console.log(valid);
     if (valid) {
         localStorage.setItem(TOKEN_KEY, loginUser.name);
     }

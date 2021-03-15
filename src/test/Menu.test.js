@@ -2,6 +2,7 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import Menu from "../components/Menu";
+import { login } from '../utils';
 
 let container = null;
 beforeEach(() => {
@@ -35,6 +36,46 @@ it("Botones del menu", () => {
         button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
     button = document.querySelector("#botonLogin");
+
+    act(() => {
+        button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+});
+
+it("Usuario admin", () => {
+    login("test@test.com", "1234");
+    act(() => {
+        render(<Menu />, container);
+    });
+    var button = document.querySelector("#botonUser");
+
+    act(() => {
+        button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+});
+
+it("Usuario regular", () => {
+    login("test1@test.com", "1234");
+    act(() => {
+        render(<Menu />, container);
+    });
+    var button = document.querySelector("#botonUser");
+
+    act(() => {
+        button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+});
+
+it("Logout", () => {
+    login("test1@test.com", "1234");
+
+    act(() => {
+        render(<Menu />, container);
+    });
+    var button = document.querySelector("#botonLogout");
 
     act(() => {
         button.dispatchEvent(new MouseEvent("click", { bubbles: true }));

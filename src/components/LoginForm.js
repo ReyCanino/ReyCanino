@@ -61,7 +61,7 @@ export default function LoginForm(props) {
     const handleLogin = () => {
         login(email, passw);
         if (isLogin()) {
-            props.history.push("/");
+            window.location = "/";
         } else {
             setError(true);
         }

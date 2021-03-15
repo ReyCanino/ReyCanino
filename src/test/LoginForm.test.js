@@ -36,7 +36,39 @@ it('Ingresar', () => {
   act(() => {
     render(<LoginForm />, container);
   });
+
+  var input = document.querySelector("#user");
+  fireEvent.change(input, { target: { value: 'test@test.com' } })
+  input = document.querySelector("#pwd");
+  fireEvent.change(input, { target: { value: '1234' } })
   var button = document.querySelector("#botonIngresar");
+
+  act(() => {
+    button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
+})
+
+it('Ingresar error', () => {
+  act(() => {
+    render(<LoginForm />, container);
+  });
+
+  var input = document.querySelector("#user");
+  fireEvent.change(input, { target: { value: 'test@test.com' } })
+  input = document.querySelector("#pwd");
+  fireEvent.change(input, { target: { value: '123' } })
+  var button = document.querySelector("#botonIngresar");
+
+  act(() => {
+    button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
+})
+
+it('Registrarse', () => {
+  act(() => {
+    render(<LoginForm />, container);
+  });
+  var button = document.querySelector("#botonRegistrarse");
 
   act(() => {
     button.dispatchEvent(new MouseEvent("click", { bubbles: true }));

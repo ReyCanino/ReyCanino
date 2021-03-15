@@ -100,22 +100,20 @@ class Menu extends Component {
     handleOnClick = () => {
         logout();
         this.setState({ isLoggedIn: isLogin() });
-        this.props.history.push("/")
+        window.location = "/";
     }
     handleLogin = () => {
-        this.props.history.push("/login")
+        window.location = "/login";
     }
 
     handleProfile = () => {
         var user = getUser();
         var route = "/";
-        console.log(user);
         if (user.type === "admin") {
             route = "/manage-reservations"
         } else if (user.type === "regular") {
             route = "/client-reservations"
         }
-        console.log(route);
         window.location = route;
     }
     render() {
@@ -180,9 +178,9 @@ class Menu extends Component {
                             </List>
                             <Divider />
                             <List>
-                                <ListItem button key={'logout'}>
+                                <ListItem button id="botonLogout" key={'logout'} onClick={this.handleOnClick}>
                                     <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-                                    <ListItemText onClick={this.handleOnClick} primary={'Logout'} />
+                                    <ListItemText primary={'Logout'} />
                                 </ListItem>
                             </List>
                         </div>
@@ -191,9 +189,9 @@ class Menu extends Component {
                         !this.state.isLoggedIn &&
                         <div>
                             <List>
-                                <ListItem button id="botonLogin" key={'Login'}>
+                                <ListItem button id="botonLogin" key={'Login'} onClick={this.handleLogin}>
                                     <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-                                    <ListItemText onClick={this.handleLogin} primary={'Login'} />
+                                    <ListItemText primary={'Login'} />
                                 </ListItem>
                             </List>
                         </div>

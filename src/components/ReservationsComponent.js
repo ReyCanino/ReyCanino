@@ -12,9 +12,6 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AlarmIcon from '@material-ui/icons/Alarm';
 
-import { getUser } from '../utils';
-
-
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: '#757575',
@@ -57,7 +54,7 @@ export default function ReservationsComponent(props) {
   const classes = useStyles();
 
   useEffect(() => {
-    if (getUser().type !== "regular") {
+    if (localStorage.getItem("type") !== "regular") {
       window.location.replace("/")
     }
   });

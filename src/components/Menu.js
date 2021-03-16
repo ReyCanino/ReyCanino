@@ -20,7 +20,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import HomeIcon from '@material-ui/icons/Home';
 import Avatar from '@material-ui/core/Avatar';
-import { isLogin, logout, getUser } from '../utils';
+import { isLogin, logout } from '../utils';
 
 const drawerWidth = 240;
 
@@ -107,11 +107,11 @@ class Menu extends Component {
     }
 
     handleProfile = () => {
-        var user = getUser();
+        var user = localStorage.getItem("type");
         var route = "/";
-        if (user.type === "admin") {
+        if (user === "admin") {
             route = "/manage-reservations"
-        } else if (user.type === "regular") {
+        } else if (user === "regular") {
             route = "/client-reservations"
         }
         window.location = route;

@@ -23,13 +23,9 @@ export const login = (email, password) => {
     })
     if (valid) {
         localStorage.setItem(TOKEN_KEY, loginUser.name);
+        localStorage.setItem("type", loginUser.type);
     }
 }
-
-export const getUser = () => {
-    return loginUser;
-}
-
 
 export const logout = () => {
     localStorage.removeItem(TOKEN_KEY);

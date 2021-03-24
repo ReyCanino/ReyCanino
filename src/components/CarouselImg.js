@@ -33,7 +33,10 @@ class Example extends Component {
                         <img src="slide2.png" />
                     </div>
                     <div>
-                        <img src="slide3.png" />
+                        <img src="slide3.jpg" />
+                    </div>
+                    <div>
+                        <img src="slide4.jpg" />
                     </div>
                 </Carousel>
             </div>

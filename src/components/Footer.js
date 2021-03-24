@@ -16,7 +16,6 @@ export default function Footer() {
 
     return (
         <AppBar className={classes.root} >
-          <Container maxWidth="md">
             <Toolbar>
                 <div>
                     <Typography variant="body1" color="inherit">
@@ -24,7 +23,6 @@ export default function Footer() {
                     </Typography>
                 </div>
             </Toolbar>
-          </Container>
         </AppBar>
     )
 }

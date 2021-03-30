@@ -15,6 +15,17 @@ export const login = (email, password) => {
     var valid = false;
     localStorage.removeItem(TOKEN_KEY);
     loginUser = {};
+
+    var prueba = { "cliente": JSON.stringify(cliente) };
+    await fetch("https://envios-api-service.herokuapp.com/api/clientes", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(prueba)
+    }).then(data => {
+        console.log(cliente);
+    });
     users.forEach((user) => {
         if (user.email === email && user.psw === password) {
             valid = true;

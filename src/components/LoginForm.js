@@ -73,7 +73,7 @@ export default function LoginForm(props) {
                     <h1>Bienvenido</h1>
                     <img src="/logo-gr.png" width='200' alt="Rey canino logo" className={classes.image} />
                     {error && <Typography variant="subtitle1" component="h2" color="error">
-                        usuario o contraseña invalidos
+                        Usuario o contraseña invalidos
                     </Typography>}
 
                     <FormControl className={classes.form} >

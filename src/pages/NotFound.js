@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import Menu from '../components/Menu';
-import Footer from '../components/Footer';
+import { Fab } from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 export default class NotFound extends Component {
 
     render() {
         return (
-            <div>
-                <Menu history={this.props.history} />
-                <h2>Oops, esta página no existe</h2>
-                <Footer />
+            <div style={{
+                backgroundImage: `url("../404.png")`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                height: "100vh"
+            }}>
+                <Menu history={this.props.history} />          
             </div>
         );
     }

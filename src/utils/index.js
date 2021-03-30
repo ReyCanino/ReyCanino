@@ -1,4 +1,4 @@
-const axios = require('axios').default;
+const axios = require('axios');
 const TOKEN_KEY = 'user';
 var loginUser = {};
 

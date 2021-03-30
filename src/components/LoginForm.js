@@ -58,8 +58,8 @@ export default function LoginForm(props) {
     const handlePasswChange = (event) => {
         setPassw(event.target.value);
     }
-    const handleLogin = () => {
-        login(email, passw);
+    const handleLogin = async () => {
+        await login(email, passw);
         if (isLogin()) {
             window.location = "/";
         } else {

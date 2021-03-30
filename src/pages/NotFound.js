@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Menu from '../components/Menu';
-import { Fab } from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 export default class NotFound extends Component {
 
@@ -13,7 +11,7 @@ export default class NotFound extends Component {
                 backgroundRepeat: 'no-repeat',
                 height: "100vh"
             }}>
-                <Menu history={this.props.history} />          
+                <Menu history={this.props.history} />
             </div>
         );
     }

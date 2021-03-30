@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; 
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { withStyles } from '@material-ui/core/styles';
 
 const useStyles = theme => ({
     root: {
-        textAlign:'center',
-        position:'center',
+        textAlign: 'center',
+        position: 'center',
     }
 });
 
-class Example extends Component {   
+class Example extends Component {
     render() {
-        const {classes} = this.props;
+        const { classes } = this.props;
 
         return (
             <div >
-                <Carousel 
+                <Carousel
                     className={classes.root}
                     showArrows={false}
                     showStatus={false}
@@ -25,22 +25,22 @@ class Example extends Component {
                     autoPlay={true}
                     swipeable={false}
                     interval={6000}
-                    >
+                >
                     <div>
-                        <img src="slide1.png" />
+                        <img src="slide1.png" alt="" />
                     </div>
                     <div>
-                        <img src="slide2.png" />
+                        <img src="slide2.png" alt="" />
                     </div>
                     <div>
-                        <img src="slide3.jpg" />
+                        <img src="slide3.jpg" alt="" />
                     </div>
                     <div>
-                        <img src="slide4.jpg" />
+                        <img src="slide4.jpg" alt="" />
                     </div>
                 </Carousel>
             </div>
-            
+
         );
     }
 };

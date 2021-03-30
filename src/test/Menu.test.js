@@ -43,8 +43,9 @@ it("Botones del menu", () => {
 
 });
 
-it("Usuario admin", () => {
-    login("test@test.com", "1234");
+it("Usuario admin", async () => {
+    localStorage.setItem("user", "prueba");
+    localStorage.setItem("type", "admin");
     act(() => {
         render(<Menu />, container);
     });
@@ -56,8 +57,9 @@ it("Usuario admin", () => {
 
 });
 
-it("Usuario regular", () => {
-    login("test1@test.com", "1234");
+it("Usuario regular", async () => {
+    localStorage.setItem("user", "prueba");
+    localStorage.setItem("type", "regular");
     act(() => {
         render(<Menu />, container);
     });
@@ -69,9 +71,9 @@ it("Usuario regular", () => {
 
 });
 
-it("Logout", () => {
-    login("test1@test.com", "1234");
-
+it("Logout", async () => {
+    localStorage.setItem("user", "prueba");
+    localStorage.setItem("type", "admin");
     act(() => {
         render(<Menu />, container);
     });

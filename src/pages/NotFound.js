@@ -13,10 +13,7 @@ export default class NotFound extends Component {
                 backgroundRepeat: 'no-repeat',
                 height: "100vh"
             }}>
-                <Menu history={this.props.history} />
-                <Fab color="primary" aria-label="add">
-                    <ArrowBackIcon />
-                </Fab>            
+                <Menu history={this.props.history} />          
             </div>
         );
     }

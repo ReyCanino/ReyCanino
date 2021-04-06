@@ -14,6 +14,7 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import axios from 'axios';
+import moment from 'moment';
 
 const useRowStyles = makeStyles({
   root: {
@@ -37,11 +38,11 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.fi}
+          {moment(row.fi).zone('+0000').format('DD-MM-YY hh:mm a')}
         </TableCell>
-        <TableCell align="right">{row.ff}</TableCell>
-        <TableCell align="right">{row.servicio}</TableCell>
-        <TableCell align="right">{(row.reserva != null)?"Ocupado":"Disponible"}</TableCell>
+        <TableCell>{moment(row.ff).zone('+0000').format('DD-MM-YY hh:mm a')}</TableCell>
+        <TableCell>{row.servicio}</TableCell>
+        <TableCell>{(row.reserva != null)?"Ocupado":"Disponible"}</TableCell>
       </TableRow>
 
       {row.reserva!=null && <TableRow>
@@ -49,7 +50,7 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                Detalles
+                Detalles de la reserva
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
@@ -89,7 +90,6 @@ export default function CollapsibleTable() {
         method: 'get',
         url: 'https://reycanino-api.herokuapp.com/reyCanino/horarioAdmin/'+localStorage.getItem("userID"),
         }).then(async (response) => {
-          console.log (response.data);
           setRows (response.data);
         });
     }
@@ -102,10 +102,10 @@ export default function CollapsibleTable() {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Fecha Inicial</TableCell>
-            <TableCell align="right">Fecha Final</TableCell>
-            <TableCell align="right">Servicio</TableCell>
-            <TableCell align="right">Estado</TableCell>
+            <TableCell>Inicio</TableCell>
+            <TableCell>Fin</TableCell>
+            <TableCell>Tipo de Servicio</TableCell>
+            <TableCell>Estado Reserva</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

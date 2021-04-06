@@ -38,9 +38,9 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {moment(row.fi).zone('+0000').format('DD-MM-YY hh:mm a')}
+          {moment(row.fi).utcOffset('+0000').format('DD-MM-YY hh:mm a')}
         </TableCell>
-        <TableCell>{moment(row.ff).zone('+0000').format('DD-MM-YY hh:mm a')}</TableCell>
+        <TableCell>{moment(row.ff).utcOffset('+0000').format('DD-MM-YY hh:mm a')}</TableCell>
         <TableCell>{row.servicio}</TableCell>
         <TableCell>{(row.reserva != null)?"Ocupado":"Disponible"}</TableCell>
       </TableRow>

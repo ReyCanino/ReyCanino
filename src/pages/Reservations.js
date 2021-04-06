@@ -7,30 +7,18 @@ export default class Reservation extends Component {
 
     render() {
         return (
-            <Container maxWidth="sm">
-
                 <div style={{
-                    backgroundImage: `url("../client-reservation2.jpg")`,
+                    backgroundImage: `url("../reservation.png")`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     height: "100vh"
-
                 }} >
                     <Menu />
+                    <br /><br /><br /><br /><br /><br />
                     <Container maxWidth="md">
-                        <h2 style={{
-                            color: "#FFFFFF",
-                            textAlign: 'center',
-                            fontWeight: 'bold',
-                            fontSize: '20',
-
-                        }}>Reservaciones</h2>
-
                         <ReservationsComponent maxWidth="md" history={this.props.history} />
                     </Container>
-
                 </div>
-            </Container>
         );
     }
 }

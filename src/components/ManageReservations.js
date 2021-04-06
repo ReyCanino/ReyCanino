@@ -87,7 +87,7 @@ export default function CollapsibleTable() {
     async function fetchData(){
       await axios({
         method: 'get',
-        url: 'http://localhost:8080/reyCanino/horarioAdmin/'+localStorage.getItem("userID"),
+        url: 'https://reycanino-api.herokuapp.com/reyCanino/horarioAdmin/'+localStorage.getItem("userID"),
         }).then(async (response) => {
           console.log (response.data);
           setRows (response.data);

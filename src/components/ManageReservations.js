@@ -14,6 +14,7 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import axios from 'axios';
+import moment from 'moment';
 
 const useRowStyles = makeStyles({
   root: {
@@ -37,9 +38,9 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.fi}
+          {moment(row.fi).zone('+0000').format('DD-MM-YY hh:mm a')}
         </TableCell>
-        <TableCell align="right">{row.ff}</TableCell>
+        <TableCell align="right">{moment(row.ff).zone('+0000').format('DD-MM-YY hh:mm a')}</TableCell>
         <TableCell align="right">{row.servicio}</TableCell>
         <TableCell align="right">{(row.reserva != null)?"Ocupado":"Disponible"}</TableCell>
       </TableRow>

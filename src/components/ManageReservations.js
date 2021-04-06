@@ -90,7 +90,6 @@ export default function CollapsibleTable() {
         method: 'get',
         url: 'https://reycanino-api.herokuapp.com/reyCanino/horarioAdmin/'+localStorage.getItem("userID"),
         }).then(async (response) => {
-          console.log (response.data);
           setRows (response.data);
         });
     }

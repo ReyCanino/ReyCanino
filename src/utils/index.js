@@ -20,7 +20,7 @@ export const login = async (email, password) => {
     await axios({
         method: 'post',
         contentType: "application/json",
-        url: 'http://localhost:8080/reyCanino/login/',
+        url: 'https://reycanino-api.herokuapp.com/reyCanino/login/',
         data: cliente
     }).then((response) => {
         loginUser = response.data;

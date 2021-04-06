@@ -1,9 +1,10 @@
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import tiendas from "../sample/Tiendas";
 import ReservaForm from '../components/ReservaForm';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,6 +26,20 @@ const useStyles = makeStyles((theme) => ({
 export default function Lista(props) {
     const classes = useStyles();
 
+    const [rows, setRows] = React.useState([]);
+
+    useEffect(() => {
+        async function fetchData(){
+          await axios({
+            method: 'get',
+            url: 'https://reycanino-api.herokuapp.com/reyCanino/tiendas',
+            }).then(async (response) => {
+              setRows (response.data);
+            });
+        }
+        fetchData();
+    }, []);
+
     return (
         <div className={classes.root}>
             <GridList cellHeight={400} className={classes.gridList}>
@@ -33,9 +48,9 @@ export default function Lista(props) {
                         Tiendas Caninas
                     </h1>
                 </GridListTile>
-                {tiendas.map((tile) => (
-                    <GridListTile key={tile.img}>
-                        <img src={tile.img} alt={tile.nombre} />
+                {rows.map((tile) => (
+                    <GridListTile key={tile.id}>
+                        <img src={'/gallery/'+tile.id+'.png'} alt={tile.nombre} />
                         <GridListTileBar
                             title={tile.nombre}
                             subtitle={<span>Direccion: {tile.direccion}</span>}

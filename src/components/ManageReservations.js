@@ -40,9 +40,9 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {moment(row.fi).zone('+0000').format('DD-MM-YY hh:mm a')}
         </TableCell>
-        <TableCell align="right">{moment(row.ff).zone('+0000').format('DD-MM-YY hh:mm a')}</TableCell>
-        <TableCell align="right">{row.servicio}</TableCell>
-        <TableCell align="right">{(row.reserva != null)?"Ocupado":"Disponible"}</TableCell>
+        <TableCell>{moment(row.ff).zone('+0000').format('DD-MM-YY hh:mm a')}</TableCell>
+        <TableCell>{row.servicio}</TableCell>
+        <TableCell>{(row.reserva != null)?"Ocupado":"Disponible"}</TableCell>
       </TableRow>
 
       {row.reserva!=null && <TableRow>
@@ -103,10 +103,10 @@ export default function CollapsibleTable() {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Fecha Inicial</TableCell>
-            <TableCell align="right">Fecha Final</TableCell>
-            <TableCell align="right">Servicio</TableCell>
-            <TableCell align="right">Estado</TableCell>
+            <TableCell>Inicio</TableCell>
+            <TableCell>Fin</TableCell>
+            <TableCell>Tipo de Servicio</TableCell>
+            <TableCell>Estado Reserva</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

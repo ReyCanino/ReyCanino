@@ -48,12 +48,12 @@ export default function Lista(props) {
                         Tiendas Caninas
                     </h1>
                 </GridListTile>
-                {rows.map((tile) => (
-                    <GridListTile key={tile.id}>
-                        <img src={'/gallery/'+tile.id+'.png'} alt={tile.nombre} />
+                {rows.map((row) => (
+                    <GridListTile key={row.id}>
+                        <img src={'/gallery/'+row.id+'.png'} alt={row.nombre} />
                         <GridListTileBar
-                            title={tile.nombre}
-                            subtitle={<span>Direccion: {tile.direccion}</span>}
+                            title={row.nombre}
+                            subtitle={<span>Direccion: {row.direccion}</span>}
                             actionIcon={
                                 <ReservaForm history={props.history} />
                             }

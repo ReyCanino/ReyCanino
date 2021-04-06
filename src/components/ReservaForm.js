@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -10,6 +10,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TablaHorarios from './TablaHorarios';
 import { isLogin } from '../utils';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,35 +31,37 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const options = [
-    { title: 'Tienda 1' },
-    { title: 'Tienda 2' },
-    { title: 'Tienda 3' },
-    { title: 'Tienda 4' },
-    { title: 'Tienda 5' },
-    { title: 'Tienda 6' },
-    { title: 'Tienda 7' },
-    { title: 'Tienda 8' }
-]
 const servicios = [
-    { title: 'Pelqueria' },
-    { title: 'Paseo' }
+    { title: 'Pelqueria', id: 1 },
+    { title: 'Paseo', id: 2 }
 ]
 
 export default function FormDialog(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [tienda, setTienda] = React.useState('');
-    const [servicio, setServicio] = React.useState('');
+    const [servicio, setServicio] = React.useState(-1);
     const [fecha, setFecha] = React.useState(new Date());
     const [horarios, setHorarios] = React.useState([]);
+    const [tiendas, setTiendas] = React.useState([]);
+
+    useEffect(() => {
+        const fetchTiendas = async () => {
+            await axios({
+                method: 'get',
+                url: 'https://reycanino-api.herokuapp.com/reyCanino/tiendas/',
+            }).then((response) => {
+                setTiendas(response.data);
+            });
+        }
+        fetchTiendas();
+    }, []);
 
     const handleClickOpen = () => {
         if (isLogin())
             setOpen(true);
         else
             props.history.push("/login");
-
     };
 
     const handleClose = () => {
@@ -77,35 +80,43 @@ export default function FormDialog(props) {
     };
 
     const handleTiendaChange = (e, newValue) => {
-        setTienda(newValue.title);
+        setTienda(newValue.id);
     }
     const handleServicioChange = (e, newValue) => {
-        setServicio(newValue.title);
+        setServicio(newValue.id);
     }
 
     const handleFechaChange = (e) => {
         setFecha(e.target.value);
     }
+    const buscar = async (horario) => {
+        const response = await fetch('http://localhost:8080/reyCanino/consultar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }, body: JSON.stringify(horario)
+        })
+        return response.json();
+    }
 
-    const buscarDisponibilidad = (e) => {
+    const buscarDisponibilidad = async () => {
         console.log(tienda, servicio, fecha);
-        if (!tienda.length || !servicio.length || !fecha)
+        if (!tienda.length || servicio < 0 || !fecha)
             return;
-        setHorarios([{
-            id: 1,
-            horaini: "fecha ejemplo",
-            horafin: "fecha ejemplo"
-        },
-        {
-            id: 2,
-            horaini: "fecha ejemplo",
-            horafin: "fecha ejemplo"
-        }, {
-            id: 3,
-            horaini: "fecha ejemplo",
-            horafin: "fecha ejemplo"
+        let valores = fecha.split("-");
+        let newDate = new Date(
+            valores[0],
+            parseInt(valores[1], 10) - 1,
+            valores[2]
+        );
+        let horario = {
+            "fechaConsulta": newDate,
+            "servicio": servicio,
+            "tiendaCanina": tienda
         }
-        ]);
+        buscar(horario).then((data) => {
+            setHorarios(data);
+        });
     }
 
     return (
@@ -121,10 +132,10 @@ export default function FormDialog(props) {
                 <DialogContent>
                     <Autocomplete
                         id="tienda"
-                        options={options}
+                        options={tiendas}
                         onChange={handleTiendaChange}
-                        getOptionLabel={(option) => option.title}
-                        getOptionSelected={(option) => option.title}
+                        getOptionLabel={(option) => option.nombre}
+                        getOptionSelected={(option) => option.id}
                         renderInput={(params) => (
                             <TextField {...params} label="Tienda" margin="normal" />
                         )}
@@ -134,7 +145,7 @@ export default function FormDialog(props) {
                         options={servicios}
                         onChange={handleServicioChange}
                         getOptionLabel={(option) => option.title}
-                        getOptionSelected={(option) => option.title}
+                        getOptionSelected={(option) => option.id}
                         renderInput={(params) => (
                             <TextField {...params} label="Servicio" margin="normal" />
                         )}
@@ -147,7 +158,7 @@ export default function FormDialog(props) {
                         onChange={handleFechaChange}
                         fullWidth
                     />
-                    <Button onClick={buscarDisponibilidad} variant="contained" className={classes.buscar}>
+                    <Button onClick={() => { buscarDisponibilidad() }} variant="contained" className={classes.buscar}>
                         Buscar disponibilidad
                     </Button>
                     <TablaHorarios key="horarios" horarios={horarios} save={handleSave} />

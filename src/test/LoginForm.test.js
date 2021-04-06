@@ -38,7 +38,7 @@ it('Ingresar', () => {
   });
 
   var input = document.querySelector("#user");
-  fireEvent.change(input, { target: { value: 'test@test.com' } })
+  fireEvent.change(input, { target: { value: 'mafehv1999@hotmail.com' } })
   input = document.querySelector("#pwd");
   fireEvent.change(input, { target: { value: '1234' } })
   var button = document.querySelector("#botonIngresar");
@@ -54,7 +54,7 @@ it('Ingresar error', () => {
   });
 
   var input = document.querySelector("#user");
-  fireEvent.change(input, { target: { value: 'test@test.com' } })
+  fireEvent.change(input, { target: { value: 'mafehv1999@hotmail.com' } })
   input = document.querySelector("#pwd");
   fireEvent.change(input, { target: { value: '123' } })
   var button = document.querySelector("#botonIngresar");

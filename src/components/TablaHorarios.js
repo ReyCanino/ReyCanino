@@ -7,16 +7,20 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import moment from 'moment';
+import IconButton from '@material-ui/core/IconButton';
+import PetsIcon from '@material-ui/icons/Pets';
 
 const useStyles = makeStyles({
+    root: {
+        marginTop: 20
+    },
     table: {
-        minWidth: 650,
+        minWidth: 500,
     },
     button: {
-        color: '#000',
-        backgroundColor: "#fff"
+        color: '#fff',
+        backgroundColor: "#000"
     },
 });
 
@@ -29,7 +33,7 @@ export default function TablaHorarios(props) {
             {
                 props.horarios.length !== 0 &&
                 <div>
-                    <TableContainer component={Paper}>
+                    <TableContainer component={Paper} className={classes.root}>
                         <Table className={classes.table} size="small" aria-label="a dense table">
                             <TableHead>
                                 <TableRow>
@@ -44,9 +48,9 @@ export default function TablaHorarios(props) {
                                         <TableCell align="center">{moment(row.fi).utcOffset('+0000').format('DD-MM-YY hh:mm a')}</TableCell>
                                         <TableCell align="center">{moment(row.ff).utcOffset('+0000').format('DD-MM-YY hh:mm a')}</TableCell>
                                         <TableCell align="center">
-                                            <Button variant="contained" className={classes.button} color="primary" onClick={() => { props.save(row.id) }}>
-                                                Reservar
-                                            </Button>
+                                            <IconButton variant="contained" onClick={() => { props.save(row.id) }}>
+                                                <PetsIcon />
+                                            </IconButton>
                                         </TableCell>
                                     </TableRow>
                                 ))}

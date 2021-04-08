@@ -39,7 +39,12 @@ const servicios = [
 export default function FormDialog(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const [openReserva, setOpenReserva] = React.useState(false);
     const [tienda, setTienda] = React.useState('');
+    const [nombreMascota, setNombreMascota] = React.useState('');
+    const [razaMascota, setRazaMascota] = React.useState('');
+    const [comentario, setComentario] = React.useState('');
+    const [idHorario, setIdHorario] = React.useState('');
     const [servicio, setServicio] = React.useState(-1);
     const [fecha, setFecha] = React.useState(new Date());
     const [horarios, setHorarios] = React.useState([]);
@@ -72,16 +77,51 @@ export default function FormDialog(props) {
         if (id === 0) {
             return;
         }
+
+        setIdHorario(id);
+        setOpenReserva(true);
+    };
+
+    const guardarReserva = async (horario) => {
+        await fetch('https://reycanino-api.herokuapp.com/reyCanino/reservar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }, body: JSON.stringify(horario)
+        }).then(response => console.log(response))
+            .catch(error => console.error(error));
+    }
+
+    const guardar = () => {
+        let body = {
+            id: idHorario,
+            tiendaCanina: tienda,
+            reserva: {
+                cliente: localStorage.getItem("userID"),
+                nombreMascota: nombreMascota,
+                comentario: comentario,
+                razaMascota: razaMascota,
+            }
+        };
+
+        guardarReserva(body);
+
         setTienda("");
         setServicio("");
         setFecha(null);
         setOpen(false);
+        setOpenReserva(false);
         setHorarios([]);
-    };
+        setNombreMascota("")
+        setRazaMascota("");
+        setComentario("");
+        setIdHorario(-1);
+    }
 
     const handleTiendaChange = (e, newValue) => {
         setTienda(newValue.id);
     }
+
     const handleServicioChange = (e, newValue) => {
         setServicio(newValue.id);
     }
@@ -89,8 +129,21 @@ export default function FormDialog(props) {
     const handleFechaChange = (e) => {
         setFecha(e.target.value);
     }
+
+    const handleNombreMascotaChange = (e) => {
+        setNombreMascota(e.target.value);
+    }
+
+    const handleRazaMascotaChange = (e) => {
+        setRazaMascota(e.target.value);
+    }
+
+    const handleComentarioChange = (e) => {
+        setComentario(e.target.value);
+    }
+
     const buscar = async (horario) => {
-        const response = await fetch('http://localhost:8080/reyCanino/consultar', {
+        const response = await fetch('https://reycanino-api.herokuapp.com/reyCanino/consultar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -100,7 +153,6 @@ export default function FormDialog(props) {
     }
 
     const buscarDisponibilidad = async () => {
-        console.log(tienda, servicio, fecha);
         if (!tienda.length || servicio < 0 || !fecha)
             return;
         let valores = fecha.split("-");
@@ -126,7 +178,7 @@ export default function FormDialog(props) {
             </Fab>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title"
                 fullWidth={true}
-                maxWidth="xl"
+                maxWidth="sm"
                 scroll="paper">
                 <DialogTitle id="form-dialog-title">Crear reserva</DialogTitle>
                 <DialogContent>
@@ -158,13 +210,46 @@ export default function FormDialog(props) {
                         onChange={handleFechaChange}
                         fullWidth
                     />
-                    <Button onClick={() => { buscarDisponibilidad() }} variant="contained" className={classes.buscar}>
+                    <br />
+                    <br />
+                    <Button onClick={buscarDisponibilidad} variant="contained" className={classes.buscar}>
                         Buscar disponibilidad
                     </Button>
                     <TablaHorarios key="horarios" horarios={horarios} save={handleSave} />
+                    {
+                        openReserva &&
+                        <div>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="nombreMascota"
+                                label="Nombre mascota"
+                                onChange={handleNombreMascotaChange}
+                                fullWidth
+                            />
+                            <TextField
+                                margin="dense"
+                                id="razaMascota"
+                                label="Raza mascota"
+                                onChange={handleRazaMascotaChange}
+                                fullWidth
+                            />
+                            <TextField
+                                margin="dense"
+                                id="comentario"
+                                label="Comentario"
+                                onChange={handleComentarioChange}
+                                fullWidth
+                            />
+                            <br />
+                            <br />
+                            <Button onClick={guardar} variant="contained" className={classes.buscar}>
+                                Guardar reserva
+                            </Button>
+                        </div>
+                    }
                 </DialogContent>
             </Dialog>
-        </div>
+        </div >
     );
 }
-

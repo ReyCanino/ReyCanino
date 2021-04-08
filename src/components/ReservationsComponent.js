@@ -46,14 +46,14 @@ export default function ReservationsComponent(props) {
     if (localStorage.getItem("type") !== "regular") {
       window.location.replace("/")
     }
-    async function fetchData(){
+    async function fetchData() {
       await axios({
         method: 'get',
-        url: 'https://reycanino-api.herokuapp.com/reyCanino/horario/'+localStorage.getItem("userID"),
-        }).then(async (response) => {
-          console.log (response.data);
-          setRows (response.data);
-        });
+        url: 'https://reycanino-api.herokuapp.com/reyCanino/horario/' + localStorage.getItem("userID"),
+      }).then(async (response) => {
+        console.log(response.data);
+        setRows(response.data);
+      });
     }
     fetchData();
   }, []);
@@ -76,8 +76,8 @@ export default function ReservationsComponent(props) {
               <StyledTableCell component="th" scope="row">
                 {row.servicio}
               </StyledTableCell>
-              <StyledTableCell>{moment(row.fi).zone('+0000').format('DD-MM-YY hh:mm a')}</StyledTableCell>
-              <StyledTableCell>{moment(row.ff).zone('+0000').format('DD-MM-YY hh:mm a')}</StyledTableCell>
+              <StyledTableCell>{moment(row.fi).utcOffset('+0000').format('DD-MM-YY hh:mm a')}</StyledTableCell>
+              <StyledTableCell>{moment(row.ff).utcOffset('+0000').format('DD-MM-YY hh:mm a')}</StyledTableCell>
               <StyledTableCell size="small">
                 <IconButton aria-label="Cancelar">
                   <DeleteIcon />

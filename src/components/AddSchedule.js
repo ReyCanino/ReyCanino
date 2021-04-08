@@ -42,7 +42,7 @@ const tiposRepeticion = [
 ]
 
 const servicios = [
-    { title: 'Pelqueria' },
+    { title: 'Peluqueria' },
     { title: 'Paseo' }
 ]
 

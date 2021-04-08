@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const servicios = [
-    { title: 'Pelqueria', id: 1 },
+    { title: 'Peluqueria', id: 1 },
     { title: 'Paseo', id: 2 }
 ]
 

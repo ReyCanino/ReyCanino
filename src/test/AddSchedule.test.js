@@ -40,7 +40,7 @@ it("General", () => {
     fireEvent.change(input, { target: { value: '23:00' } })
 
     input = document.querySelector("#servicio");
-    fireEvent.change(input, { target: { value: 'Pelqueria' } })
+    fireEvent.change(input, { target: { value: 'Peluqueria' } })
 
     input = document.querySelector("#tipoRepeticion");
     fireEvent.change(input, { target: { value: 'Unica' } })

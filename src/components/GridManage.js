@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ManageReservations from './ManageReservations';
 import ManageHorario from './ManageHorario';

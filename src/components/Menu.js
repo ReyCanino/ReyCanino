@@ -55,6 +55,7 @@ const styles = theme => ({
     },
     drawerPaper: {
         width: drawerWidth,
+        marginBottom: 0
     },
     drawerHeader: {
         display: 'flex',

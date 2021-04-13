@@ -101,6 +101,92 @@ const useStyles = makeStyles((theme) => ({
 export default function TabSelect(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [state, setState] = React.useState({});
+  const [error, setError] = React.useState(false);
+  const [tipo, setTipo] = React.useState("admin");
+  const [errorMessage, setErrorMessage] = React.useState("");
+
+  const handleChangeProperty = (event) => {
+    state[event.target.name] = event.target.value
+    setState(state)
+  }
+
+  const obligatorios = () => {
+    if (state.nombre === undefined || state.nombre.length === 0) {
+      setError(true);
+      setErrorMessage("Ingrese nombre");
+    } else if (state.correo === undefined || state.correo.length === 0) {
+      setError(true);
+      setErrorMessage("Ingrese correo");
+    } else if ((state.direccion === undefined || state.direccion.length === 0) && tipo === "admin") {
+      setError(true);
+      setErrorMessage("Ingrese direccion");
+    } else if (state.pasw1 === undefined || state.pasw1.length === 0) {
+      setError(true);
+      setErrorMessage("Ingrese contraseña");
+    } else if (state.pasw2 === undefined || state.pasw2.length === 0) {
+      setError(true);
+      setErrorMessage("Ingrese la contraseña nuevamente");
+    } else if (state.telefono === undefined || state.telefono.length === 0) {
+      setError(true);
+      setErrorMessage("Ingrese telefono");
+    }
+  }
+
+  const guardar = async () => {
+    //const response = await fetch('https://reycanino-api.herokuapp.com/reyCanino/agregarCliente', {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(state.pasw1);
+    var crypto = window.crypto.subtle;
+    var pasw = await crypto.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(pasw));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+
+    var cliente = {
+      nombre: state.nombre,
+      telefono: state.telefono,
+      correo: state.correo,
+      direccion: state.direccion,
+      tipo: tipo,
+      psw: hashHex.toString()
+    }
+    console.log(tipo);
+    console.log(cliente);
+    await fetch('http://localhost:8080/reyCanino/agregarCliente', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }, body: JSON.stringify(cliente)
+    }).then(response => console.log(response))
+      .catch(error => console.error(error));
+  }
+
+  const handleSave = async () => {
+    setError(false);
+    obligatorios();
+    var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    if (!pattern.test(state.correo)) {
+      setError(true);
+      setErrorMessage("Ingrese un email valido");
+    } else if (state.telefono && state.telefono.length !== 7 && state.telefono.length !== 10) {
+      setError(true);
+      setErrorMessage("Ingrese un telefono valido");
+    } else if (state.pasw1 !== state.pasw2) {
+      setError(true);
+      setErrorMessage("Las constraseñas no coinciden");
+    }
+    if (!error)
+      guardar();
+  }
+
+  const resetState = () => {
+    setState({});
+  }
+
+  const handleTipoChange = (tipo) => {
+    console.log(tipo);
+    setTipo(tipo);
+  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -117,18 +203,29 @@ export default function TabSelect(props) {
           width="60"
           indicatorColor="primary"
         >
-          <LinkTab label="Tienda" {...a11yProps(0)} />
-          <LinkTab label="Cliente" {...a11yProps(1)} />
+          <LinkTab label="Tienda" {...a11yProps(0)} onClick={() => {
+            handleTipoChange("admin");
+            resetState();
+          }} />
+          <LinkTab label="Cliente" {...a11yProps(1)} onClick={() => {
+            handleTipoChange("regular");
+            resetState();
+          }} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} height="100">
         <div className={classes.root2}>
           <Grid>
             <h2 margin='5px'>Crear cuenta</h2>
+            {error && <Typography variant="subtitle1" component="h2" color="error">
+              {errorMessage}
+            </Typography>}
             <FormControl className={classes.form} >
               <InputLabel htmlFor="user">Nombre de la tienda</InputLabel>
               <Input
                 id="user"
+                name="nombre"
+                onChange={handleChangeProperty}
                 startAdornment={
                   <InputAdornment position="start">
                     <StoreIcon />
@@ -140,6 +237,8 @@ export default function TabSelect(props) {
               <InputLabel htmlFor="mail" >Email de contacto</InputLabel>
               <Input
                 id="mail"
+                name="correo"
+                onChange={handleChangeProperty}
                 startAdornment={
                   <InputAdornment position="start">
                     <EmailIcon />
@@ -150,6 +249,8 @@ export default function TabSelect(props) {
               <InputLabel htmlFor="addr">Direccion de la tienda</InputLabel>
               <Input
                 id="addr"
+                name="direccion"
+                onChange={handleChangeProperty}
                 startAdornment={
                   <InputAdornment position="start">
                     <RoomIcon />
@@ -162,6 +263,8 @@ export default function TabSelect(props) {
               <Input
                 id="pwd"
                 type="password"
+                name="pasw1"
+                onChange={handleChangeProperty}
                 startAdornment={
                   <InputAdornment position="start">
                     <VpnKeySharpIcon />
@@ -173,6 +276,8 @@ export default function TabSelect(props) {
               <Input
                 id="pwd2"
                 type="password"
+                name="pasw2"
+                onChange={handleChangeProperty}
                 startAdornment={
                   <InputAdornment position="start">
                     <VpnKeySharpIcon />
@@ -183,6 +288,9 @@ export default function TabSelect(props) {
               <InputLabel htmlFor="tel" >Telefono de contacto</InputLabel>
               <Input
                 id="tel"
+                name="telefono"
+                type="number"
+                onChange={handleChangeProperty}
                 startAdornment={
                   <InputAdornment position="start">
                     <PhoneIcon />
@@ -190,7 +298,7 @@ export default function TabSelect(props) {
                 } />
             </FormControl>
             <div>
-              <Button variant="contained" className={classes.button} disableElevation>
+              <Button variant="contained" className={classes.button} onClick={handleSave} disableElevation>
                 Registrarme
                       </Button>
             </div>
@@ -212,10 +320,15 @@ export default function TabSelect(props) {
         <div className={classes.root2}>
           <Grid>
             <h2 margin='5px'>Crear cuenta</h2>
+            {error && <Typography variant="subtitle1" component="h2" color="error">
+              {errorMessage}
+            </Typography>}
             <FormControl className={classes.form} >
               <InputLabel htmlFor="user">Nombre de usuario</InputLabel>
               <Input
                 id="user"
+                name="nombre"
+                onChange={handleChangeProperty}
                 startAdornment={
                   <InputAdornment position="start">
                     <AccountCircle />
@@ -227,6 +340,8 @@ export default function TabSelect(props) {
               <InputLabel htmlFor="mail" >Email de contacto</InputLabel>
               <Input
                 id="mail"
+                name="correo"
+                onChange={handleChangeProperty}
                 startAdornment={
                   <InputAdornment position="start">
                     <EmailIcon />
@@ -238,6 +353,8 @@ export default function TabSelect(props) {
               <Input
                 id="pwd"
                 type="password"
+                name="pasw1"
+                onChange={handleChangeProperty}
                 startAdornment={
                   <InputAdornment position="start">
                     <VpnKeySharpIcon />
@@ -249,6 +366,8 @@ export default function TabSelect(props) {
               <Input
                 id="pwd2"
                 type="password"
+                name="pasw2"
+                onChange={handleChangeProperty}
                 startAdornment={
                   <InputAdornment position="start">
                     <VpnKeySharpIcon />
@@ -259,6 +378,8 @@ export default function TabSelect(props) {
               <InputLabel htmlFor="tel" >Telefono de contacto</InputLabel>
               <Input
                 id="tel"
+                name="telefono"
+                onChange={handleChangeProperty}
                 startAdornment={
                   <InputAdornment position="start">
                     <PhoneIcon />
@@ -266,7 +387,7 @@ export default function TabSelect(props) {
                 } />
             </FormControl>
             <div>
-              <Button variant="contained" className={classes.button} disableElevation>
+              <Button variant="contained" className={classes.button} onClick={handleSave} disableElevation>
                 Registrarme
                       </Button>
             </div>

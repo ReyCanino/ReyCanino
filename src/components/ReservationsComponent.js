@@ -97,9 +97,12 @@ export default function ReservationsComponent(props) {
           </Table>
         </TableContainer>
       }
-      <h1 align="center">Tú peludo aún no tiene citas</h1>
-      <h2 align="center">¡Te estamos esperando!</h2>
+      {rows.length === 0 && 
+        <div>
+          <h1 align="center">Tú peludo aún no tiene citas</h1>
+          <h2 align="center">¡Te estamos esperando!</h2>
+        </div> 
+      }
     </div>
-    
   );
 }

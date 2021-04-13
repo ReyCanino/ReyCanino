@@ -8,13 +8,13 @@ export default class Reservation extends Component {
     render() {
         return (
                 <div style={{
-                    backgroundImage: `url("../reservation.png")`,
+                    backgroundImage: `url("../reservations.png")`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     height: "100vh"
                 }} >
                     <Menu />
-                    <br /><br /><br /><br /><br /><br />
+                    <img src="/reservation.jpg" alt="Cabecera" width="100%" style={{marginTop:"-50px"}}/>
                     <Container maxWidth="md">
                         <ReservationsComponent maxWidth="md" history={this.props.history} />
                     </Container>

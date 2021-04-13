@@ -59,40 +59,47 @@ export default function ReservationsComponent(props) {
   }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Servicio</StyledTableCell>
-            <StyledTableCell>Inicio</StyledTableCell>
-            <StyledTableCell>Fin</StyledTableCell>
-            <StyledTableCell size="small"></StyledTableCell>
-            <StyledTableCell size="small"></StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.id}>
-              <StyledTableCell component="th" scope="row">
-                {row.servicio}
-              </StyledTableCell>
-              <StyledTableCell>{moment(row.fi).utcOffset('+0000').format('DD-MM-YY hh:mm a')}</StyledTableCell>
-              <StyledTableCell>{moment(row.ff).utcOffset('+0000').format('DD-MM-YY hh:mm a')}</StyledTableCell>
-              <StyledTableCell size="small">
-                <IconButton aria-label="Cancelar">
-                  <DeleteIcon />
-                </IconButton>
-              </StyledTableCell>
+    <div>
+      {rows.length !== 0 && 
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Servicio</StyledTableCell>
+                <StyledTableCell>Inicio</StyledTableCell>
+                <StyledTableCell>Fin</StyledTableCell>
+                <StyledTableCell size="small"></StyledTableCell>
+                <StyledTableCell size="small"></StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.id}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.servicio}
+                  </StyledTableCell>
+                  <StyledTableCell>{moment(row.fi).utcOffset('+0000').format('DD-MM-YY hh:mm a')}</StyledTableCell>
+                  <StyledTableCell>{moment(row.ff).utcOffset('+0000').format('DD-MM-YY hh:mm a')}</StyledTableCell>
+                  <StyledTableCell size="small">
+                    <IconButton aria-label="Cancelar">
+                      <DeleteIcon />
+                    </IconButton>
+                  </StyledTableCell>
 
-              <StyledTableCell align="right" size="small">
-                <IconButton color="secondary" aria-label="add an alarm">
-                  <AlarmIcon />
-                </IconButton>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                  <StyledTableCell align="right" size="small">
+                    <IconButton color="secondary" aria-label="add an alarm">
+                      <AlarmIcon />
+                    </IconButton>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      }
+      <h1 align="center">Tú peludo aún no tiene citas</h1>
+      <h2 align="center">¡Te estamos esperando!</h2>
+    </div>
+    
   );
 }

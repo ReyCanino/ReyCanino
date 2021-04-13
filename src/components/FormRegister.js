@@ -134,7 +134,6 @@ export default function TabSelect(props) {
   }
 
   const guardar = async () => {
-    //const response = await fetch('https://reycanino-api.herokuapp.com/reyCanino/agregarCliente', {
     const encoder = new TextEncoder();
     const data = encoder.encode(state.pasw1);
     var crypto = window.crypto.subtle;
@@ -150,15 +149,16 @@ export default function TabSelect(props) {
       tipo: tipo,
       psw: hashHex.toString()
     }
-    console.log(tipo);
-    console.log(cliente);
-    await fetch('http://localhost:8080/reyCanino/agregarCliente', {
+    await fetch('https://reycanino-api.herokuapp.com/reyCanino/agregarCliente', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       }, body: JSON.stringify(cliente)
-    }).then(response => console.log(response))
-      .catch(error => console.error(error));
+    }).then(response => {
+      if (response.status === 202)
+        props.history.push('/login')
+    })
+      .catch(message => console.error(message));
   }
 
   const handleSave = async () => {
@@ -183,9 +183,8 @@ export default function TabSelect(props) {
     setState({});
   }
 
-  const handleTipoChange = (tipo) => {
-    console.log(tipo);
-    setTipo(tipo);
+  const handleTipoChange = (type) => {
+    setTipo(type);
   }
 
   const handleChange = (event, newValue) => {

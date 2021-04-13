@@ -8,8 +8,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import TablePagination from '@material-ui/core/TablePagination';
 import axios from 'axios';
 import moment from 'moment';
@@ -128,7 +129,10 @@ export default function ReservationsComponent(props) {
     if (localStorage.getItem("type") !== "regular") {
       window.location.replace("/")
     }
-    async function fetchData() {
+    fetchData();
+  }, []);
+  
+  async function fetchData() {
       await axios({
         method: 'get',
         url: 'https://reycanino-api.herokuapp.com/reyCanino/horario/' + localStorage.getItem("userID"),
@@ -137,8 +141,15 @@ export default function ReservationsComponent(props) {
         setRows(response.data);
       });
     }
-    fetchData();
-  }, []);
+
+  const cancelar = async(id) =>{
+    await axios({
+      method: 'get',
+      url: 'https://reycanino-api.herokuapp.com/reyCanino/cancelar/' + id,
+    }).then(async (response) => {
+      fetchData();
+    });
+  }
 
   return (
     <div>
@@ -165,9 +176,11 @@ export default function ReservationsComponent(props) {
                   <StyledTableCell>{moment(row.fi).utcOffset('+0000').format('DD-MM-YY hh:mm a')}</StyledTableCell>
                   <StyledTableCell>{moment(row.ff).utcOffset('+0000').format('DD-MM-YY hh:mm a')}</StyledTableCell>
                   <StyledTableCell size="small">
-                    <IconButton aria-label="Cancelar">
-                      <DeleteIcon />
-                    </IconButton>
+                    <Button
+                      startIcon={<DeleteIcon />}
+                      onClick={()=>{cancelar(row.id)}}
+                    >
+                    </Button>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

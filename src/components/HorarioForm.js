@@ -91,10 +91,10 @@ export default function FormDialog(props) {
         setServicio(newValue.title);
     }
     const handleFechaInicioChange = (e) => {
-        setFechaInicio(e.target.value);
+        setFechaInicio(e.target.valueAsDate);
     }
     const handleFechaFinChange = (e) => {
-        setFechaFin(e.target.value);
+        setFechaFin(e.target.valueAsDate);
     }
 
     return (
@@ -122,8 +122,8 @@ export default function FormDialog(props) {
                         autoFocus
                         id="fechaInicio"
                         label="Fecha Inicio"
-                        type="datetime-local"
-                        defaultValue="2017-05-24T10:30"
+                        type="date"
+                        defaultValue="2021-04-17T16:30:00-05:00"
                         onChange={handleFechaInicioChange}
                         fullWidth
                     />
@@ -131,8 +131,8 @@ export default function FormDialog(props) {
                         autoFocus
                         id="fechaFin"
                         label="Fecha Fin"
-                        type="datetime-local"
-                        defaultValue="2017-05-24T10:30"
+                        type="date"
+                        defaultValue="2021-04-17T16:30:00-05:00"
                         fullWidth
                         onChange={handleFechaFinChange}
                     />

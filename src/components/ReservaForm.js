@@ -52,7 +52,7 @@ export default function FormDialog(props) {
 
     useEffect(() => {
         const fetchTiendas = async () => {
-            await axios({
+            axios({
                 method: 'get',
                 url: 'https://reycanino-api.herokuapp.com/reyCanino/tiendas/',
             }).then((response) => {

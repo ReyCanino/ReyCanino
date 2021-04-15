@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Menu from '../components/Menu';
-import ManageReservations from '../components/ManageReservations';
 import GridManage from '../components/GridManage';
 import { Container } from '@material-ui/core';
 

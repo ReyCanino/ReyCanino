@@ -153,8 +153,8 @@ export default function ReservationsComponent(props) {
 
   return (
     <div>
-      {rows.length !== 0 && 
         <TableContainer component={Paper}>
+          {rows.length !== 0 && 
           <Table className={classes.table} aria-label="customized table">
             <TableHead>
               <TableRow>
@@ -200,14 +200,14 @@ export default function ReservationsComponent(props) {
               ActionsComponent={TablePaginationActions}
             />
           </Table>
+          }
+        {rows.length === 0 && 
+          <div>
+            <h1 align="center">Tú peludo aún no tiene citas</h1>
+            <h2 align="center">¡Te estamos esperando!</h2>
+          </div> 
+        }
         </TableContainer>
-      }
-      {rows.length === 0 && 
-        <div>
-          <h1 align="center">Tú peludo aún no tiene citas</h1>
-          <h2 align="center">¡Te estamos esperando!</h2>
-        </div> 
-      }
     </div>
   );
 }

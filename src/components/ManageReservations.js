@@ -63,24 +63,24 @@ function TablePaginationActions(props) {
       <IconButton
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
-        aria-label="first page"
+        aria-label="primera pagina"
       >
         {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
-      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
+      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="atras">
         {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
+        aria-label="siguiente"
       >
         {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
+        aria-label="ultima"
       >
         {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
       </IconButton>
@@ -148,7 +148,6 @@ function Row(props) {
     </React.Fragment>
   );
 }
-
 export default function CollapsibleTable() {
   const [rows, setRows] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -179,7 +178,8 @@ export default function CollapsibleTable() {
   }, []);
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} >
+      {rows.length !== 0 && 
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
@@ -199,7 +199,7 @@ export default function CollapsibleTable() {
           ))}
         </TableBody>
         <TablePagination
-          rowsPerPageOptions={[{ label: 'All', value: -1 }]}
+          rowsPerPageOptions={[{ label: 'Todo', value: -1 }]}
           colSpan={3}
           count={rows.length}
           rowsPerPage={rowsPerPage}
@@ -213,6 +213,13 @@ export default function CollapsibleTable() {
           ActionsComponent={TablePaginationActions}
         />
       </Table>
+      }
+      {rows.length === 0 && 
+        <div>
+          <h1 align="center">Aún no tienes reservas</h1>
+          <h2 align="center">¡Tus clientes te esperan!</h2>
+        </div> 
+      }
     </TableContainer>
   );
 }

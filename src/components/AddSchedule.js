@@ -42,8 +42,8 @@ const tiposRepeticion = [
 ]
 
 const servicios = [
-    { title: 'Peluqueria' },
-    { title: 'Paseo' }
+    { title: 'Peluqueria', value: "peluqueria" },
+    { title: 'Veterinaria', value: "veterinaria" }
 ]
 
 export default function FormDialog(props) {
@@ -73,7 +73,7 @@ export default function FormDialog(props) {
     }
 
     const handleServicioChange = (e, newValue) => {
-        setServicio(newValue.title);
+        setServicio(newValue.value);
     }
 
     const handleTimesChange = (e) => {
@@ -94,8 +94,37 @@ export default function FormDialog(props) {
     }
 
     const addSchedule = (e) => {
-        if (!tipoRepeticion.length || !fecha || !tipoRepeticion.length || !servicio.length || !time || !timef)
+        console.log(times <= 0);
+        if (times <= 0 || !fecha || !tipoRepeticion.length || !servicio.length || !time || !timef)
             return;
+        console.log(fecha);
+        let timesI = time.split(":");
+        let timesF = timef.split(":");
+        let fechaf = new Date(fecha);
+        let fechai = new Date(fecha);
+        fechai.setUTCHours(timesI[0])
+        fechai.setUTCMinutes(timesI[1])
+        fechaf.setUTCHours(timesF[0])
+        fechaf.setUTCMinutes(timesF[1])
+        let horario = {
+            ff: fechaf,
+            fi: fechai,
+            servicio: servicio,
+            tiendaCanina: localStorage.getItem("userID"),
+            cantRepeticiones: times,
+            tipoRepeticion: tipoRepeticion
+
+        }
+        console.log(fechai);
+        console.log(fechaf);
+        console.log(JSON.stringify(horario));
+        fetch('http://localhost:8080/reyCanino/horario/agregar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }, body: JSON.stringify(horario)
+        }).then(response => console.log(response))
+            .catch(error => console.error(error));
         handleClose();
     }
 
@@ -126,7 +155,7 @@ export default function FormDialog(props) {
                         options={servicios}
                         onChange={handleServicioChange}
                         getOptionLabel={(option) => option.title}
-                        getOptionSelected={(option) => option.title}
+                        getOptionSelected={(option) => option.value}
                         renderInput={(params) => (
                             <TextField {...params} label="Servicio" margin="normal" />
                         )}

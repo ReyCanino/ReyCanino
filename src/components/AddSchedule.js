@@ -148,7 +148,6 @@ export default function FormDialog(props) {
                         value={fecha}
                         onChange={handleFechaChange}
                         fullWidth
-
                     />
                     <Autocomplete
                         id="servicio"

@@ -7,6 +7,7 @@ const useStyles = theme => ({
     root: {
         textAlign: 'center',
         position: 'center',
+        marginTop: "-48px"
     }
 });
 

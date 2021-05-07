@@ -113,7 +113,7 @@ export default function FormDialog(props) {
             tipoRepeticion: tipoRepeticion
 
         }
-        fetch('http://localhost:8080/reyCanino/horario/agregar', {
+        fetch('https://reycanino-api.herokuapp.com/reyCanino/horario/agregar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -94,10 +94,8 @@ export default function FormDialog(props) {
     }
 
     const addSchedule = (e) => {
-        console.log(times <= 0);
         if (times <= 0 || !fecha || !tipoRepeticion.length || !servicio.length || !time || !timef)
             return;
-        console.log(fecha);
         let timesI = time.split(":");
         let timesF = timef.split(":");
         let fechaf = new Date(fecha);
@@ -115,9 +113,6 @@ export default function FormDialog(props) {
             tipoRepeticion: tipoRepeticion
 
         }
-        console.log(fechai);
-        console.log(fechaf);
-        console.log(JSON.stringify(horario));
         fetch('http://localhost:8080/reyCanino/horario/agregar', {
             method: 'POST',
             headers: {
